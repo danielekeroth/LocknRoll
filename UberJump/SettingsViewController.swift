@@ -65,55 +65,52 @@ class SettingsViewController: GameViewController
     
     var currentGameMode = ""
     
+    func HandleSwipe(right: Bool)
+    {
+        if soundFXVolumeLabel.focused && ((soundFXVolumeBar.progress < 1.0 && right) || soundFXVolumeBar.progress > 0.0 && !right)
+        {
+            adjustFxVolume(right)
+        }
+        else if musicVoulmeLabel.focused && ((musicVolumeBar.progress < 1.0 && right) || musicVolumeBar.progress > 0.0 && !right)
+        {
+            adjustMusicVolume(right)
+        }
+        else if gameModeLabel.focused
+        {
+            changeGameMode(right)
+        }
+        else if bgMusicLabel.focused
+        {
+            changeBGMusic(right)
+        }
+    }
+    
     @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
-        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-            
-            switch swipeGesture.direction {
-            case UISwipeGestureRecognizerDirection.Right:
-                if soundFXVolumeLabel.focused && soundFXVolumeBar.progress < 1.0
-                {
-                    adjustFxVolume(true)
-                }
-                else if musicVoulmeLabel.focused && musicVolumeBar.progress < 1.0
-                {
-                    adjustMusicVolume(true)
-                }
-                else if gameModeLabel.focused
-                {
-                    changeGameMode(true)
-                }
-                else if bgMusicLabel.focused
-                {
-                    let currentSongIndex = Global.BackgroundMusic.indexOf({$0.Name == BGMusic.Name})
-                    let newSong = currentSongIndex < Global.BackgroundMusic.count-1 ? Global.BackgroundMusic[currentSongIndex!+1] : Global.BackgroundMusic.first!
-                    NSUserDefaults.standardUserDefaults().setObject(newSong.Name, forKey: SettingsHelper.BGMusic)
-                    BGMusic = AudioPlayer(path: newSong.Path,autoPlay: true,repeatForever: true,volume: NSUserDefaults.standardUserDefaults().floatForKey(SettingsHelper.MusicVolume),name: newSong.Name)
-                    selectedBGMusicLabel.text = newSong.Name
-                }
-            case UISwipeGestureRecognizerDirection.Left:
-                if bgMusicLabel.focused {
-                    let currentSongIndex = Global.BackgroundMusic.indexOf({$0.Name == BGMusic.Name})
-                    let newSong = currentSongIndex >= 1 ? Global.BackgroundMusic[currentSongIndex!-1] : Global.BackgroundMusic.last!
-                    NSUserDefaults.standardUserDefaults().setObject(newSong.Name, forKey: SettingsHelper.BGMusic)
-                    BGMusic = AudioPlayer(path: newSong.Path,autoPlay: true,repeatForever: true,volume: NSUserDefaults.standardUserDefaults().floatForKey(SettingsHelper.MusicVolume),name: newSong.Name)
-                    selectedBGMusicLabel.text = newSong.Name
-                }
-                else if gameModeLabel.focused
-                {
-                    changeGameMode(false)
-                }
-                else if soundFXVolumeLabel.focused && soundFXVolumeBar.progress > 0.0
-                {
-                    adjustFxVolume(false)
-                }
-                else if musicVoulmeLabel.focused && musicVolumeBar.progress > 0.0
-                {
-                    adjustMusicVolume(false)
-                }
-            default:
-                break
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer
+        {
+            if swipeGesture.direction == .Left || swipeGesture.direction == .Right
+            {
+                HandleSwipe(swipeGesture.direction == .Right)
             }
         }
+    }
+    
+    func changeBGMusic(goNext: Bool)
+    {
+        let currentSongIndex = Global.BackgroundMusic.indexOf({$0.Name == BGMusic.Name})
+        var nextSongIndex = goNext == true ? currentSongIndex!+1 : currentSongIndex!-1
+        if nextSongIndex == Global.BackgroundMusic.endIndex
+        {
+            nextSongIndex = 0
+        }
+        else if nextSongIndex < Global.BackgroundMusic.startIndex
+        {
+            nextSongIndex = Global.BackgroundMusic.endIndex-1
+        }
+        let newSong = Global.BackgroundMusic[nextSongIndex]
+        NSUserDefaults.standardUserDefaults().setObject(newSong.Name, forKey: SettingsHelper.BGMusic)
+        BGMusic = AudioPlayer(path: newSong.Path,autoPlay: true,repeatForever: true,volume: musicVolumeBar.progress,name: newSong.Name)
+        selectedBGMusicLabel.text = newSong.Name
     }
     
     func changeGameMode(goNext: Bool)
@@ -146,17 +143,18 @@ class SettingsViewController: GameViewController
         NSUserDefaults.standardUserDefaults().setFloat(musicVolumeBar.progress, forKey: SettingsHelper.MusicVolume)
     }
     
-    override func viewDidLoad() {
-        selectedGameModeLabel.morphingEffect = .Evaporate
-        selectedGameModeLabel.morphingEnabled = true
-        selectedBGMusicLabel.morphingEffect = .Scale
-        selectedBGMusicLabel.morphingEnabled = true
+    func addRecognizers() {
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(SettingsViewController.respondToSwipeGesture(_:)))
         swipeRight.direction = UISwipeGestureRecognizerDirection.Right
         self.view.addGestureRecognizer(swipeRight)
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(SettingsViewController.respondToSwipeGesture(_:)))
         swipeLeft.direction = UISwipeGestureRecognizerDirection.Left
         self.view.addGestureRecognizer(swipeLeft)
+    }
+    
+    override func viewDidLoad() {
+        selectedGameModeLabel.morphingEffect = .Evaporate
+        selectedBGMusicLabel.morphingEffect = .Scale
         selectedBGMusicLabel.text = NSUserDefaults.standardUserDefaults().stringForKey(SettingsHelper.BGMusic)
         currentGameMode = NSUserDefaults.standardUserDefaults().stringForKey(SettingsHelper.GameMode)!
         selectedGameModeLabel.text = currentGameMode
