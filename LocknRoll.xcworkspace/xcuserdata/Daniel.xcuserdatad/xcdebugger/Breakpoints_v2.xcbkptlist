@@ -168,27 +168,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UberJump/GameHelper.swift"
-            timestampString = "483501418.804568"
+            timestampString = "483710069.607698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "318"
-            endingLineNumber = "318"
-            landmarkName = "UpdateDigits()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "UberJump/GameHelper.swift"
-            timestampString = "483501418.804568"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "434"
-            endingLineNumber = "434"
+            startingLineNumber = "411"
+            endingLineNumber = "411"
             landmarkName = "AddDot()"
             landmarkType = "5">
          </BreakpointContent>
@@ -200,27 +184,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UberJump/GameHelper.swift"
-            timestampString = "483501418.804568"
+            timestampString = "483710069.607698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "285"
-            endingLineNumber = "285"
-            landmarkName = "CreateDigits()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "UberJump/GameHelper.swift"
-            timestampString = "483501418.804568"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
             landmarkName = "LoadSettings()"
             landmarkType = "5">
          </BreakpointContent>
@@ -248,11 +216,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UberJump/GameHelper.swift"
-            timestampString = "483501418.804568"
+            timestampString = "483710069.607698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "634"
-            endingLineNumber = "634"
+            startingLineNumber = "597"
+            endingLineNumber = "597"
             landmarkName = "nextLevel()"
             landmarkType = "5">
          </BreakpointContent>
@@ -264,27 +232,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UberJump/GameHelper.swift"
-            timestampString = "483501418.804568"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "632"
-            endingLineNumber = "632"
-            landmarkName = "nextLevel()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "UberJump/GameHelper.swift"
-            timestampString = "483501418.804568"
+            timestampString = "483710069.607698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "596"
             endingLineNumber = "596"
+            landmarkName = "nextLevel()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "UberJump/GameHelper.swift"
+            timestampString = "483710069.607698"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "556"
+            endingLineNumber = "556"
             landmarkName = "DotTouched()"
             landmarkType = "5">
          </BreakpointContent>
@@ -296,11 +264,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UberJump/GameHelper.swift"
-            timestampString = "483501418.804568"
+            timestampString = "483710069.607698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
             landmarkName = "LoadSettings()"
             landmarkType = "5">
          </BreakpointContent>
@@ -312,11 +280,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UberJump/GameHelper.swift"
-            timestampString = "483501418.804568"
+            timestampString = "483710069.607698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "LoadSettings()"
             landmarkType = "5">
          </BreakpointContent>
@@ -328,11 +296,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UberJump/GameHelper.swift"
-            timestampString = "483501418.804568"
+            timestampString = "483710069.607698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
             landmarkName = "LoadSettings()"
             landmarkType = "5">
          </BreakpointContent>
@@ -344,11 +312,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UberJump/GameHelper.swift"
-            timestampString = "483501418.804568"
+            timestampString = "483710069.607698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "LoadSettings()"
             landmarkType = "5">
          </BreakpointContent>
@@ -360,11 +328,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UberJump/GameHelper.swift"
-            timestampString = "483501418.804568"
+            timestampString = "483710069.607698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
             landmarkName = "LoadSettings()"
             landmarkType = "5">
          </BreakpointContent>
@@ -376,11 +344,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UberJump/GameHelper.swift"
-            timestampString = "483501418.804568"
+            timestampString = "483708002.2137"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "268"
-            endingLineNumber = "268"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
             landmarkName = "LoadView(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -424,11 +392,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UberJump/GameHelper.swift"
-            timestampString = "483501418.804568"
+            timestampString = "483710069.607698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "374"
-            endingLineNumber = "374"
+            startingLineNumber = "360"
+            endingLineNumber = "360"
             landmarkName = "AddDotModern()"
             landmarkType = "5">
          </BreakpointContent>
@@ -440,11 +408,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UberJump/GameHelper.swift"
-            timestampString = "483501418.804568"
+            timestampString = "483708002.2137"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
             landmarkName = "LoadViewModern()"
             landmarkType = "5">
          </BreakpointContent>
@@ -456,11 +424,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UberJump/GameHelper.swift"
-            timestampString = "483499283.516844"
+            timestampString = "483710069.607698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
             landmarkName = "ColorizeCanvas()"
             landmarkType = "5">
          </BreakpointContent>
@@ -472,39 +440,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UberJump/GameHelper.swift"
-            timestampString = "483499283.516844"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "ColorizeCanvas()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "UberJump/GameHelper.swift"
-            timestampString = "483389964.566587"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
-            landmarkName = "ColorizeCanvas()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "UberJump/GameHelper.swift"
-            timestampString = "483389964.566587"
+            timestampString = "483710069.607698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "71"
@@ -520,11 +456,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UberJump/GameHelper.swift"
-            timestampString = "483501418.804568"
+            timestampString = "483710069.607698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "400"
-            endingLineNumber = "400"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "ColorizeCanvas()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "UberJump/GameHelper.swift"
+            timestampString = "483710069.607698"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "383"
+            endingLineNumber = "383"
             landmarkName = "AddDotModern()"
             landmarkType = "5">
          </BreakpointContent>
@@ -616,11 +568,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UberJump/GameHelper.swift"
-            timestampString = "483501418.804568"
+            timestampString = "483710069.607698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "612"
-            endingLineNumber = "612"
+            startingLineNumber = "572"
+            endingLineNumber = "572"
             landmarkName = "DotTouched()"
             landmarkType = "5">
          </BreakpointContent>
@@ -632,11 +584,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UberJump/GameHelper.swift"
-            timestampString = "483501418.804568"
+            timestampString = "483710069.607698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "614"
-            endingLineNumber = "614"
+            startingLineNumber = "574"
+            endingLineNumber = "574"
             landmarkName = "DotTouched()"
             landmarkType = "5">
          </BreakpointContent>
@@ -680,7 +632,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UberJump/SettingsViewController.swift"
-            timestampString = "483680433.646879"
+            timestampString = "483707038.891774"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "155"
@@ -696,11 +648,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UberJump/SettingsViewController.swift"
-            timestampString = "483680433.646879"
+            timestampString = "483706815.874198"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "respondToSwipeGesture(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -712,11 +664,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UberJump/SettingsViewController.swift"
-            timestampString = "483680433.646879"
+            timestampString = "483706815.874198"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
             landmarkName = "respondToSwipeGesture(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -728,11 +680,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UberJump/ClassicGameScene.swift"
-            timestampString = "483701234.827569"
+            timestampString = "483706815.874198"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "init()"
             landmarkType = "5">
          </BreakpointContent>

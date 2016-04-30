@@ -6,6 +6,7 @@
 //  Copyright © 2016 Geekfox Consulting. All rights reserved.
 //
 
+import Answers
 import Foundation
 
 public class SceneHelper {

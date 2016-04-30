@@ -12,18 +12,36 @@ import SpriteKit
 import AVKit
 import GameKit
 
-public class GameHelper
+public class NodeCollection : UICollection {
+    var Circle = SKSpriteNode()
+    var Person = SKShapeNode()
+    var Dot = SKShapeNode()
+    var Dial = SKSpriteNode()
+    var Digits = SKSpriteNode()
+    var Arrow = SKSpriteNode()
+    var Range = SKSpriteNode()
+    var Outer = SKSpriteNode()
+    var Lock = SKSpriteNode()
+    var PauseOverlay = SKSpriteNode()
+    var Canvas = SKSpriteNode()
+}
+
+public class UICollection
+{
+    var scoreHolder = UIStackView()
+    var GameScene = SKScene()
+    var LevelLabel = UILabel()
+    var HighscoreLabel = UILabel()
+}
+
+public class GameHelper : NodeCollection
 {
     init(mode: GameModes){
         self.gameMode = mode
     }
     // Variables and Properties
-    var GameScene = SKScene()
     var gameMode : GameModes
-    var scoreHolder = UIStackView()
-    var FirstDigit = NumberMorphView()
-    var SecondDigit = NumberMorphView()
-    var ThirdDigit = NumberMorphView()
+    var DigitCollection = [NumberMorphView(),NumberMorphView(),NumberMorphView()]
     var deaths = 0
     var numberOfClicks = 0
     var intersected = false
@@ -31,8 +49,6 @@ public class GameHelper
     var currentLevel = Int()
     var currentScore = Int()
     var highLevel = Int()
-    var LevelLabel = UILabel()
-    var HighscoreLabel = UILabel()
     var gameSpeed = CGFloat(400)
     
     // Color variables
@@ -46,17 +62,6 @@ public class GameHelper
     
     
     // Game Objects
-    var Circle = SKSpriteNode()
-    var Person = SKShapeNode()
-    var Dot = SKShapeNode()
-    var Dial = SKSpriteNode()
-    var Digits = SKSpriteNode()
-    var Arrow = SKSpriteNode()
-    var Range = SKSpriteNode()
-    var Outer = SKSpriteNode()
-    var Lock = SKSpriteNode()
-    var PauseOverlay = SKSpriteNode()
-    var Canvas = SKSpriteNode()
     var HighscoreKey = ""
     var currentGameMode = ""
     var totalClicks = 0
@@ -79,9 +84,10 @@ public class GameHelper
         let isBlack = contrastValue/100 > 125
         HighscoreLabel.textColor = isBlack ? UIColor.blackColor() : UIColor.whiteColor()
         LevelLabel.textColor = isBlack ? UIColor.blackColor() : UIColor.whiteColor()
-        self.FirstDigit.fontColor = isBlack ? UIColor.blackColor() : UIColor.whiteColor()
-        self.SecondDigit.fontColor = isBlack ? UIColor.blackColor() : UIColor.whiteColor()
-        self.ThirdDigit.fontColor = isBlack ? UIColor.blackColor() : UIColor.whiteColor()
+        for digit in DigitCollection
+        {
+            digit.fontColor = isBlack ? UIColor.blackColor() : UIColor.whiteColor()
+        }
         let action = SKAction.colorizeWithColor(self.currentColor, colorBlendFactor: 1.0, duration: 1.2)
         self.Canvas.removeActionForKey("colorize")
         self.GameScene.runAction(action, withKey: "colorize")
@@ -144,23 +150,28 @@ public class GameHelper
         Circle.position = CGPoint(x: CGRectGetMidX(GameScene.frame), y: CGRectGetMidY(GameScene.frame)-yOffset)
         Circle.zPosition = 2.0
         GameScene.addChild(Circle)
-        
+    }
+    
+    func AddPerson(heightOffset: CGFloat, zPos: CGFloat)
+    {
         Person = SKShapeNode.init(rectOfSize: CGSize(width:62,height:9), cornerRadius: 4)
         Person.fillColor = SKColor.init(red: 0.803, green: 0.404, blue: 0.404, alpha: 1.0)
         Person.strokeColor = SKColor.init(red: 0.803, green: 0.404, blue: 0.404, alpha: 1.0)
-        Person.position = CGPoint(x: GameScene.frame.width / 2, y: GameScene.frame.height / 2 + 72)
+        Person.position = CGPoint(x: GameScene.frame.width / 2, y: GameScene.frame.height / 2 + heightOffset)
         Person.zRotation = 3.14 / 2
-        Person.zPosition = 2.0
+        Person.zPosition = zPos
         GameScene.addChild(Person)
     }
     
     func LoadViewClassic() {
         LoadViewShared(0)
+        AddPerson(202, zPos: 4.0)
         AddDot()
     }
     
     func LoadViewModern() {
         LoadViewShared(130)
+        AddPerson(72, zPos: 2.0)
         loadModernElements()
         AddDot()
     }
@@ -260,6 +271,7 @@ public class GameHelper
         {
             ColorizeCanvas()
         }
+        AddTapRecognizers()
     }
     
     func AddTapRecognizers() {
@@ -282,12 +294,11 @@ public class GameHelper
     }
     
     func CreateDigits() {
-        FirstDigit.SetProperties((gameMode == .Classic || gameMode == .ClassicEndless || gameMode == .HardcoreClassic) ? UIColor.whiteColor() : UIColor.whiteColor())
-        SecondDigit.SetProperties((gameMode == .Classic || gameMode == .ClassicEndless || gameMode == .HardcoreClassic) ? UIColor.whiteColor() : UIColor.whiteColor())
-        ThirdDigit.SetProperties((gameMode == .Classic || gameMode == .ClassicEndless || gameMode == .HardcoreClassic) ? UIColor.whiteColor() : UIColor.whiteColor())
-        scoreHolder.addArrangedSubview(FirstDigit)
-        scoreHolder.addArrangedSubview(SecondDigit)
-        scoreHolder.addArrangedSubview(ThirdDigit)
+        for digit in DigitCollection
+        {
+            digit.SetProperties((gameMode == .Classic || gameMode == .ClassicEndless || gameMode == .HardcoreClassic) ? UIColor.whiteColor() : UIColor.whiteColor())
+            scoreHolder.addArrangedSubview(digit)
+        }
     }
     
     func UpdateDigits() {
@@ -301,32 +312,21 @@ public class GameHelper
                 GCHelper.saveHighScore(self.currentScore, leaderboardId: (gameMode == .ModernEndless) ? Leaderboards.ModernEndless : Leaderboards.ClassicEndless)
             }
             if digits.count == 2 {
-                scoreHolder.addArrangedSubview(SecondDigit)
+                scoreHolder.addArrangedSubview(DigitCollection[1])
             }
             else if digits.count == 3
             {
-                scoreHolder.addArrangedSubview(ThirdDigit)
+                scoreHolder.addArrangedSubview(DigitCollection[2])
             }
         }
         if digits.count == 1 {
-            SecondDigit.removeFromSuperview()
-            ThirdDigit.removeFromSuperview()
+            DigitCollection[1].removeFromSuperview()
+            DigitCollection[2].removeFromSuperview()
         } else if digits.count == 2 {
-            ThirdDigit.removeFromSuperview()
+            DigitCollection[2].removeFromSuperview()
         }
         for digit in digits {
-            if(iteration == 0)
-            {
-                FirstDigit.animateToDigit(digit)
-            }
-            else if iteration == 1
-            {
-                SecondDigit.animateToDigit(digit)
-            }
-            else if iteration == 2
-            {
-                ThirdDigit.animateToDigit(digit)
-            }
+            DigitCollection[iteration].animateToDigit(digit)
             iteration += 1
         }
     }
@@ -638,7 +638,7 @@ public class GameHelper
         }
     }
     
-    func diedShared() {
+    func diedShared(modern: Bool) {
         totalClicks = 0
         if ALInterstitialAd.isReadyForDisplay() && (deaths >= 10 || numberOfClicks >= 100) && NSUserDefaults.standardUserDefaults().boolForKey("removedAds") == false
         {
@@ -668,18 +668,28 @@ public class GameHelper
         GameScene.removeAllChildren()
         intersected = false
         gameStarted = false
-        let shakeAction = SKAction.shake(Canvas.position, duration: 2)
-        Canvas.runAction(shakeAction,completion: {
-            self.scoreHolder.removeFromSuperview()
-            self.GameScene.removeAllChildren()
-            self.currentScore = self.currentLevel
-            self.LoadView(true)
-        })
+        if modern
+        {
+            let shakeAction = SKAction.shake(Canvas.position, duration: 2)
+            Canvas.runAction(shakeAction,completion: {
+                self.ResetView()
+            })}
+        else
+        {
+            ResetView()
+        }
+    }
+    
+    func ResetView() {
+        self.scoreHolder.removeFromSuperview()
+        self.GameScene.removeAllChildren()
+        self.currentScore = self.currentLevel
+        self.LoadView(true)
     }
     
     func diedModern() {
         ClearActions()
-        diedShared()
+        diedShared(true)
     }
     
     func died(){
@@ -687,7 +697,7 @@ public class GameHelper
         case .ModernEndless, .Modern, .HardcoreModern:
             diedModern()
         case .ClassicEndless, .Classic, .HardcoreClassic:
-            diedShared()
+            diedShared(false)
         }
     }
     

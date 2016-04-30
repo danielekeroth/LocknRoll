@@ -153,6 +153,9 @@ class SettingsViewController: GameViewController
     }
     
     override func viewDidLoad() {
+        NSUserDefaults.standardUserDefaults().setObject("Normal", forKey: SettingsHelper.GameMode)
+        soundFXVolumeLabel.preferredFocusedView
+        addRecognizers()
         selectedGameModeLabel.morphingEffect = .Evaporate
         selectedBGMusicLabel.morphingEffect = .Scale
         selectedBGMusicLabel.text = NSUserDefaults.standardUserDefaults().stringForKey(SettingsHelper.BGMusic)
