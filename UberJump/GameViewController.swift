@@ -79,12 +79,6 @@ class GameViewController: UIViewController,SKPaymentTransactionObserver,SKProduc
             print(trans.error)
             switch trans.transactionState {
             case .Purchased:
-                let eventService = ALSdk.shared()
-                eventService?.eventService.trackInAppPurchaseWithTransactionIdentifier(trans.transactionIdentifier!, parameters:
-                    [kALEventParameterStoreKitTransactionIdentifierKey:trans.transactionIdentifier!,
-                        kALEventParameterRevenueAmountKey:p.price,
-                        kALEventParameterRevenueCurrencyKey:p.priceLocale]
-                )
                 Answers.logCustomEventWithName("Purchase completed", customAttributes: ["Product":p.productIdentifier,"Price":p.price])
                 queue.finishTransaction(trans)
                 removeAds()
@@ -166,22 +160,22 @@ class GameViewController: UIViewController,SKPaymentTransactionObserver,SKProduc
     
     var contentURL = NSBundle.mainBundle().URLForResource("intro", withExtension: "mp4")
     var IntroPlayer = AVPlayer()
-    var playerView = UIView()
     var playerLayer = AVPlayerLayer()
     @IBOutlet weak var logoImage: UIImageView!
     
     func AddIntroVideo() {
-        let playerItem = AVPlayerItem(URL: contentURL!)
-        IntroPlayer = AVPlayer(playerItem: playerItem)
+        IntroPlayer = AVPlayer(playerItem: AVPlayerItem(URL: contentURL!))
         playerLayer = AVPlayerLayer(player: IntroPlayer)
-        playerView = UIView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
         self.view.layer.addSublayer(playerLayer)
         playerLayer.frame = view.bounds
+        AddVideoObservers()
+        IntroPlayer.play()
+    }
+    
+    func AddVideoObservers() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameViewController.playerDidFinishPlaying(_:)),
                                                          name: AVPlayerItemDidPlayToEndTimeNotification, object: IntroPlayer.currentItem)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameViewController.playerHadError(_:)), name: AVPlayerItemNewErrorLogEntryNotification, object: IntroPlayer.currentItem)
-        self.view.addSubview(playerView)
-        IntroPlayer.play()
     }
     
     override func viewDidLoad() {
@@ -205,23 +199,31 @@ class GameViewController: UIViewController,SKPaymentTransactionObserver,SKProduc
             }
             }, completion: {
                 (value: Bool) in
-                let verticalConstraint = self.logoImage.centerYAnchor.constraintEqualToAnchor(self.view.centerYAnchor,constant: -300)
-                self.view.addConstraint(verticalConstraint)
-                self.playerView.removeFromSuperview()
-                self.view.setNeedsFocusUpdate()
-                self.view.updateFocusIfNeeded()
-                GCHelper.authPlayer(self.view)
-                self.registerDefaults()
-                if(self.isKindOfClass(GameViewController))
-                {
-                    if SKPaymentQueue.canMakePayments() {
-                        self.productsRequest = SKProductsRequest(productIdentifiers: ["com.geekfox.locknroll.removeads"])
-                        self.productsRequest!.delegate = self
-                        self.productsRequest!.start()
-                    }
-                    self.initializeMainMenu()
-                }
+                self.UIInitialized()
         })
+    }
+    
+    func UIInitialized() {
+        let verticalConstraint = self.logoImage.centerYAnchor.constraintEqualToAnchor(self.view.centerYAnchor,constant: -300)
+        self.view.addConstraint(verticalConstraint)
+        self.view.setNeedsFocusUpdate()
+        self.view.updateFocusIfNeeded()
+        GCHelper.authPlayer(self.view)
+        self.registerDefaults()
+        if(self.isKindOfClass(GameViewController))
+        {
+            GetIAPS()
+            self.initializeMainMenu()
+        }
+    }
+    
+    func GetIAPS()
+    {
+        if SKPaymentQueue.canMakePayments() {
+            self.productsRequest = SKProductsRequest(productIdentifiers: ["com.geekfox.locknroll.removeads"])
+            self.productsRequest!.delegate = self
+            self.productsRequest!.start()
+        }
     }
     
     func playerHadError(note: NSNotification) {

@@ -42,9 +42,12 @@ class AllGameScene : SKScene,ALAdVideoPlaybackDelegate
         super.init(coder: aDecoder)
     }
     
+    var gameMode : String?
+    
     init(size: CGSize,mode: String)
     {
         Helper = SceneHelper.InitializeGameScene(mode)
+        gameMode = mode;
         super.init(size: size)
         Helper!.GameScene = self
     }
@@ -57,10 +60,11 @@ class AllGameScene : SKScene,ALAdVideoPlaybackDelegate
     
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
-        if Helper!.Person.intersectsNode(Helper!.Range){
+        let obj = gameMode == "Classic" ? Helper!.Dot : Helper!.Range
+        if Helper!.Person.intersectsNode(obj){
             Helper!.intersected = true
         }
-        else if Helper!.intersected == true && Helper!.Person.intersectsNode(Helper!.Range) == false
+        else if Helper!.intersected == true && Helper!.Person.intersectsNode(obj) == false
         {
             Helper!.died()
         }

@@ -25,6 +25,12 @@
             <PersistentString
                value = "currentScore/currentLevel">
             </PersistentString>
+            <PersistentString
+               value = "gameMode">
+            </PersistentString>
+            <PersistentString
+               value = "intersected">
+            </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
@@ -72,7 +78,7 @@
          contextName = "GameHelper.LoadView() -&gt; ():GameHelper.swift">
          <PersistentStrings>
             <PersistentString
-               value = "newColor.CGColor">
+               value = "(UIColor)self.currentColor">
             </PersistentString>
             <PersistentString
                value = "NSLayoutAttribute.CenterX">
@@ -87,7 +93,15 @@
                value = "Double(56.0/255.0)">
             </PersistentString>
             <PersistentString
-               value = "(UIColor)self.currentColor">
+               value = "newColor.CGColor">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GameController.viewDidLoad() -&gt; ():GameController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "segueId">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
