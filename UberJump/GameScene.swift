@@ -11,6 +11,24 @@ import SpriteKit
 import CoreGraphics
 import Answers
 
+extension SKScene {
+    func videoPlaybackBeganInAd(ad: ALAd)
+    {
+        BGMusic.Player.pause()
+        Answers.logCustomEventWithName("Ad Started", customAttributes: ["Ad Type":ad.type,"Ad Size":ad.size,"Ad ID":ad.adIdNumber])
+    }
+    
+    func videoPlaybackEndedInAd(ad: ALAd, atPlaybackPercent percentPlayed: NSNumber, fullyWatched wasFullyWatched: Bool)
+    {
+        BGMusic.Player.play()
+        Answers.logCustomEventWithName("Ad Ended", customAttributes: ["Fully Watched":wasFullyWatched,"Percentage Played":percentPlayed,"Ad Type":ad.type,"Ad Size":ad.size,"Ad ID":ad.adIdNumber])
+    }
+    
+    internal func ShowAd() {
+        ALInterstitialAd.show()
+    }
+}
+
 class GameScene: SKScene,ALAdVideoPlaybackDelegate
 {
     // Sprite Nodes

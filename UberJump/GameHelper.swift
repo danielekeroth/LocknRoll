@@ -74,15 +74,8 @@ public class GameHelper : NodeCollection
     func ShowAd() {
         self.deaths = 0
         self.numberOfClicks = 0
-        switch gameMode
-        {
-        case .Classic,.ClassicEndless,.HardcoreClassic:
-            let scene = self.GameScene as! ClassicGameScene
-            scene.ShowAd()
-        case .HardcoreModern,.Modern,.ModernEndless:
-            let scene = self.GameScene as! ModernGameScene
-            scene.ShowAd()
-        }
+        let scene = self.GameScene as! GameScene
+        scene.ShowAd()
     }
     
     func LoadSettings() {
