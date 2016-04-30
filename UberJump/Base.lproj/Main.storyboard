@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" initialViewController="499-42-d0g">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Bobbleboddy.ttf">
+            <string>bubbleboddy-Fat</string>
+            <string>bubbleboddy-Fat</string>
+        </mutableArray>
+        <mutableArray key="Odin.otf">
+            <string>Odin-Bold</string>
+            <string>Odin-Bold</string>
+            <string>Odin-Bold</string>
+            <string>Odin-Bold</string>
+            <string>Odin-Bold</string>
+            <string>Odin-Bold</string>
+            <string>Odin-Bold</string>
+        </mutableArray>
+        <mutableArray key="Sniglet.ttf">
+            <string>Sniglet</string>
+        </mutableArray>
+    </customFonts>
+    <scenes>
+        <!--MainMenu-->
+        <scene sceneID="dEh-eV-dlg">
+            <objects>
+                <viewController title="MainMenu" id="499-42-d0g" customClass="GameViewController" customModule="LocknRoll" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TiC-Vw-u93"/>
+                        <viewControllerLayoutGuide type="bottom" id="3TX-uQ-fmp"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" id="weF-Pa-zaM">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="urn-bE-nnV">
+                                <rect key="frame" x="792" y="354" width="337" height="371"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
+                                </accessibility>
+                            </imageView>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ce-3u-dHo">
+                                <rect key="frame" x="825" y="474" width="269" height="71"/>
+                                <fontDescription key="fontDescription" name="Sniglet" family="Sniglet" pointSize="70"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <size key="titleShadowOffset" width="5" height="5"/>
+                                <state key="normal" backgroundImage="play-button-normal.png">
+                                    <color key="titleShadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="play-button-selected.png">
+                                    <color key="titleShadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" backgroundImage="play-button-pressed.png">
+                                    <color key="titleShadowColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <state key="focused" backgroundImage="play-button-selected.png"/>
+                                <connections>
+                                    <segue destination="2z7-zd-BRE" kind="presentation" modalPresentationStyle="overFullScreen" modalTransitionStyle="coverVertical" id="p07-ZN-hPX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Qs-gN-56k">
+                                <rect key="frame" x="826" y="582" width="269" height="71"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" backgroundImage="options-button-normal.png"/>
+                                <state key="selected" backgroundImage="options-button-focus.png"/>
+                                <state key="highlighted" backgroundImage="options-button-pressed.png"/>
+                                <state key="focused" backgroundImage="options-button-focus.png"/>
+                                <connections>
+                                    <segue destination="jtI-Qg-04E" kind="presentation" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="0PA-wq-sko"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.20000000000000001" green="0.53333333333333333" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="urn-bE-nnV" firstAttribute="centerY" secondItem="weF-Pa-zaM" secondAttribute="centerY" id="ZKA-FS-FtI"/>
+                            <constraint firstItem="urn-bE-nnV" firstAttribute="centerX" secondItem="weF-Pa-zaM" secondAttribute="centerX" id="pYC-do-lMJ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="logoImage" destination="urn-bE-nnV" id="s5L-mr-VED"/>
+                        <outlet property="settingsButton" destination="5Qs-gN-56k" id="CPw-o9-aZc"/>
+                        <outlet property="startGameButton" destination="2ce-3u-dHo" id="C8r-aJ-F0U"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dFW-Nd-Df7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="975" y="494"/>
+        </scene>
+        <!--GameModeView-->
+        <scene sceneID="U09-SX-2Zp">
+            <objects>
+                <viewController title="GameModeView" id="2z7-zd-BRE" customClass="GameModeController" customModule="LocknRoll" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="phh-e7-b0K"/>
+                        <viewControllerLayoutGuide type="bottom" id="wFu-bc-g4d"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="TopLeft" id="PAk-ef-9t8">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="80" translatesAutoresizingMaskIntoConstraints="NO" id="wcU-VN-GkM">
+                                <rect key="frame" x="840" y="497" width="240" height="86"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pmv-kM-LX9" customClass="PosterButton" customModule="LocknRoll" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="86"/>
+                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nqu-3u-wMh" customClass="PosterButton" customModule="LocknRoll" customModuleProvider="target">
+                                        <rect key="frame" x="160" y="0.0" width="80" height="86"/>
+                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Pmv-kM-LX9" firstAttribute="firstBaseline" secondItem="Nqu-3u-wMh" secondAttribute="firstBaseline" id="0kX-Ec-ZuC"/>
+                                    <constraint firstItem="Pmv-kM-LX9" firstAttribute="firstBaseline" secondItem="Nqu-3u-wMh" secondAttribute="firstBaseline" id="5Dn-Kx-PMe"/>
+                                    <constraint firstItem="Nqu-3u-wMh" firstAttribute="baseline" secondItem="Pmv-kM-LX9" secondAttribute="baseline" id="P5O-W6-UVM"/>
+                                    <constraint firstItem="Nqu-3u-wMh" firstAttribute="baseline" secondItem="Pmv-kM-LX9" secondAttribute="baseline" id="Pu9-0A-xJC"/>
+                                    <constraint firstItem="Nqu-3u-wMh" firstAttribute="baseline" secondItem="Pmv-kM-LX9" secondAttribute="baseline" id="Rpe-kY-Tcf"/>
+                                    <constraint firstItem="Nqu-3u-wMh" firstAttribute="firstBaseline" secondItem="Pmv-kM-LX9" secondAttribute="firstBaseline" id="YK8-Gd-OtD"/>
+                                    <constraint firstItem="Pmv-kM-LX9" firstAttribute="baseline" secondItem="Nqu-3u-wMh" secondAttribute="baseline" id="o0e-Uk-Bzv"/>
+                                    <constraint firstItem="Pmv-kM-LX9" firstAttribute="firstBaseline" secondItem="Nqu-3u-wMh" secondAttribute="firstBaseline" id="pCC-gF-fGk"/>
+                                </constraints>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hardcore mode is on - you have been warned!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P4d-b3-3wT">
+                                <rect key="frame" x="0.0" y="883" width="1920" height="125"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="125" id="PMN-zv-NRL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="bubbleboddy-Fat" family="bubbleboddy" pointSize="60"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <size key="shadowOffset" width="3" height="3"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="skull.png" translatesAutoresizingMaskIntoConstraints="NO" id="tbE-uX-dis">
+                                <rect key="frame" x="200" y="856" width="132" height="180"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="132" id="PSC-Af-fjI"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="skull.png" translatesAutoresizingMaskIntoConstraints="NO" id="ihd-Jc-VoQ">
+                                <rect key="frame" x="1588" y="856" width="132" height="180"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="132" id="Ruk-zR-c5l"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Endless mode is on - better block some time out!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nq7-EB-WMU">
+                                <rect key="frame" x="0.0" y="883" width="1920" height="125"/>
+                                <fontDescription key="fontDescription" name="bubbleboddy-Fat" family="bubbleboddy" pointSize="60"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <size key="shadowOffset" width="3" height="3"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.3034686839374709" green="0.30996399836850957" blue="0.32325721153846154" alpha="0.84393857758620694" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="P4d-b3-3wT" firstAttribute="firstBaseline" secondItem="Nq7-EB-WMU" secondAttribute="firstBaseline" id="8TW-Sy-FhX"/>
+                            <constraint firstItem="wcU-VN-GkM" firstAttribute="centerX" secondItem="Nq7-EB-WMU" secondAttribute="centerX" id="AuX-TX-r4V"/>
+                            <constraint firstItem="ihd-Jc-VoQ" firstAttribute="top" secondItem="tbE-uX-dis" secondAttribute="top" id="B4a-lQ-h4B"/>
+                            <constraint firstItem="wFu-bc-g4d" firstAttribute="top" secondItem="ihd-Jc-VoQ" secondAttribute="bottom" constant="44" id="Dc9-oI-mAv"/>
+                            <constraint firstItem="tbE-uX-dis" firstAttribute="leading" secondItem="PAk-ef-9t8" secondAttribute="leading" constant="200" id="R9g-mw-7WD"/>
+                            <constraint firstItem="wFu-bc-g4d" firstAttribute="top" secondItem="P4d-b3-3wT" secondAttribute="bottom" constant="72" id="UgA-hk-MvD"/>
+                            <constraint firstItem="P4d-b3-3wT" firstAttribute="leading" secondItem="PAk-ef-9t8" secondAttribute="leading" id="Uzd-Gu-Wj3"/>
+                            <constraint firstItem="P4d-b3-3wT" firstAttribute="baseline" secondItem="Nq7-EB-WMU" secondAttribute="baseline" id="WJx-eo-M7C"/>
+                            <constraint firstItem="P4d-b3-3wT" firstAttribute="leading" secondItem="Nq7-EB-WMU" secondAttribute="leading" id="aSJ-6N-pn6"/>
+                            <constraint firstAttribute="trailing" secondItem="ihd-Jc-VoQ" secondAttribute="trailing" constant="200" id="awJ-a4-8On"/>
+                            <constraint firstItem="wcU-VN-GkM" firstAttribute="centerX" secondItem="PAk-ef-9t8" secondAttribute="centerX" id="ca9-tv-c1Z"/>
+                            <constraint firstItem="P4d-b3-3wT" firstAttribute="centerY" secondItem="tbE-uX-dis" secondAttribute="centerY" id="meF-Qb-jQg"/>
+                            <constraint firstItem="P4d-b3-3wT" firstAttribute="centerY" secondItem="ihd-Jc-VoQ" secondAttribute="centerY" id="sNE-DE-pwH"/>
+                            <constraint firstItem="wcU-VN-GkM" firstAttribute="centerX" secondItem="P4d-b3-3wT" secondAttribute="centerX" id="vCD-4U-Pqt"/>
+                            <constraint firstItem="wcU-VN-GkM" firstAttribute="centerY" secondItem="PAk-ef-9t8" secondAttribute="centerY" id="xsP-yN-L7O"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="classicGameModeButton" destination="Pmv-kM-LX9" id="Vjx-zY-BdA"/>
+                        <outlet property="endlessLabel" destination="Nq7-EB-WMU" id="Ca0-Pu-018"/>
+                        <outlet property="hardcoreImage" destination="tbE-uX-dis" id="a8H-QT-0VA"/>
+                        <outlet property="hardcoreImage2" destination="ihd-Jc-VoQ" id="PS5-Gc-I95"/>
+                        <outlet property="hardcoreLabel" destination="P4d-b3-3wT" id="vbe-l4-7a9"/>
+                        <outlet property="modernGameModeButton" destination="Nqu-3u-wMh" id="Rs8-06-JE2"/>
+                        <segue destination="QKW-Tg-YM0" kind="showDetail" identifier="ModernGameSegue" action="showViewController:sender:" id="W4U-bE-bmT"/>
+                        <segue destination="QKW-Tg-YM0" kind="showDetail" identifier="ClassicGameSegue" action="showViewController:sender:" id="0Xw-PV-eDj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EC1-zR-IRq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3169" y="1749"/>
+        </scene>
+        <!--ModernGameView-->
+        <scene sceneID="s1H-af-rR6">
+            <objects>
+                <viewController title="ModernGameView" id="QKW-Tg-YM0" customClass="GameController" customModule="LocknRoll" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bph-Ba-xgc"/>
+                        <viewControllerLayoutGuide type="bottom" id="cQ3-Lr-GjQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wbI-9v-hcc" customClass="SKView">
+                        <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="maT-up-Zbt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3497" y="356"/>
+        </scene>
+        <!--SettingsView-->
+        <scene sceneID="2s8-LZ-5o5">
+            <objects>
+                <viewController title="SettingsView" id="jtI-Qg-04E" customClass="SettingsViewController" customModule="LocknRoll" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5G9-bF-OXo"/>
+                        <viewControllerLayoutGuide type="bottom" id="laz-hg-l4K"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QyG-P4-DsP">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="options-background.png" translatesAutoresizingMaskIntoConstraints="NO" id="8Gv-gD-AOC">
+                                <rect key="frame" x="518" y="68" width="936" height="789"/>
+                            </imageView>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sound FX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wIH-S7-dUD" customClass="FocusableText" customModule="LocknRoll" customModuleProvider="target">
+                                <rect key="frame" x="578" y="258" width="290" height="64"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" button="YES"/>
+                                </accessibility>
+                                <fontDescription key="fontDescription" name="Odin-Bold" family="Odin Rounded" pointSize="64"/>
+                                <color key="textColor" red="0.54509803921568623" green="0.51372549019607838" blue="0.45490196078431372" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="highlightedColor" red="0.54509803921568623" green="0.70758179530201337" blue="0.45490196078431372" alpha="1" colorSpace="calibratedRGB"/>
+                            </label>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="BG Music" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zDf-aL-aPd" customClass="FocusableText" customModule="LocknRoll" customModuleProvider="target">
+                                <rect key="frame" x="578" y="469" width="239" height="75"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" button="YES"/>
+                                </accessibility>
+                                <fontDescription key="fontDescription" name="Odin-Bold" family="Odin Rounded" pointSize="64"/>
+                                <color key="textColor" red="0.5450980392" green="0.51372549020000002" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="highlightedColor" red="0.5450980392" green="0.70758179529999998" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                            </label>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Game Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6DF-LK-nej" customClass="FocusableText" customModule="LocknRoll" customModuleProvider="target">
+                                <rect key="frame" x="578" y="580" width="312" height="75"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" button="YES"/>
+                                </accessibility>
+                                <fontDescription key="fontDescription" name="Odin-Bold" family="Odin Rounded" pointSize="64"/>
+                                <color key="textColor" red="0.5450980392" green="0.51372549020000002" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="highlightedColor" red="0.5450980392" green="0.70758179529999998" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                            </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="T0f-Zr-aEh">
+                                <rect key="frame" x="986" y="285" width="428" height="10"/>
+                                <color key="progressTintColor" red="0.5450980392" green="0.70758179529999998" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="trackTintColor" red="0.5450980392" green="0.51372549020000002" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                            </progressView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="JVu-FT-90p">
+                                <rect key="frame" x="986" y="391" width="428" height="10"/>
+                                <color key="progressTintColor" red="0.5450980392" green="0.70758179529999998" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="trackTintColor" red="0.5450980392" green="0.51372549020000002" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                            </progressView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Default" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbE-Fd-rEB" customClass="LTMorphingLabel" customModule="LTMorphingLabel">
+                                <rect key="frame" x="986" y="469" width="428" height="75"/>
+                                <fontDescription key="fontDescription" name="Odin-Bold" family="Odin Rounded" pointSize="64"/>
+                                <color key="textColor" red="0.5450980392" green="0.51372549020000002" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Standard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5rh-yc-5bM" customClass="LTMorphingLabel" customModule="LTMorphingLabel">
+                                <rect key="frame" x="986" y="580" width="428" height="75"/>
+                                <fontDescription key="fontDescription" name="Odin-Bold" family="Odin Rounded" pointSize="64"/>
+                                <color key="textColor" red="0.5450980392" green="0.51372549020000002" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rxT-N8-9aJ">
+                                <rect key="frame" x="648" y="741" width="676" height="68"/>
+                                <fontDescription key="fontDescription" name="Odin-Bold" family="Odin Rounded" pointSize="49"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <size key="titleShadowOffset" width="2" height="2"/>
+                                <state key="normal" title="Reset Progress">
+                                    <color key="titleColor" red="0.5450980392" green="0.51372549020000002" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" red="0.99215686270000003" green="0.39876487799999999" blue="0.30691982359999997" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <state key="focused">
+                                    <color key="titleColor" red="0.99215686270000003" green="0.39876487799999999" blue="0.30691982359999997" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetProgressButton:" destination="jtI-Qg-04E" eventType="primaryActionTriggered" id="OK8-dK-BMf"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Music" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVD-fu-ZNT" customClass="FocusableText" customModule="LocknRoll" customModuleProvider="target">
+                                <rect key="frame" x="578" y="358" width="290" height="75"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" button="YES"/>
+                                </accessibility>
+                                <fontDescription key="fontDescription" name="Odin-Bold" family="Odin Rounded" pointSize="64"/>
+                                <color key="textColor" red="0.5450980392" green="0.51372549020000002" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="highlightedColor" red="0.5450980392" green="0.70758179529999998" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                            </label>
+                        </subviews>
+                    </view>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="C3A-gu-8Oq"/>
+                    </toolbarItems>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="bgMusicLabel" destination="zDf-aL-aPd" id="HKh-ov-kgE"/>
+                        <outlet property="gameModeLabel" destination="6DF-LK-nej" id="VLy-dB-Ux3"/>
+                        <outlet property="musicVolumeBar" destination="JVu-FT-90p" id="cug-qH-9pN"/>
+                        <outlet property="musicVoulmeLabel" destination="aVD-fu-ZNT" id="FC5-LU-Nrn"/>
+                        <outlet property="selectedBGMusicLabel" destination="hbE-Fd-rEB" id="Rfe-Rx-hfe"/>
+                        <outlet property="selectedGameModeLabel" destination="5rh-yc-5bM" id="FTb-96-fyT"/>
+                        <outlet property="soundFXVolumeBar" destination="T0f-Zr-aEh" id="0Hd-CJ-5CL"/>
+                        <outlet property="soundFXVolumeLabel" destination="wIH-S7-dUD" id="AZN-Ht-Yoy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q7E-pC-ifc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="651" y="1975"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="logo.png" width="337" height="371"/>
+        <image name="options-background.png" width="936" height="789"/>
+        <image name="options-button-focus.png" width="269" height="71"/>
+        <image name="options-button-normal.png" width="269" height="71"/>
+        <image name="options-button-pressed.png" width="269" height="71"/>
+        <image name="play-button-normal.png" width="269" height="71"/>
+        <image name="play-button-pressed.png" width="269" height="71"/>
+        <image name="play-button-selected.png" width="269" height="71"/>
+        <image name="skull.png" width="528" height="720"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="W4U-bE-bmT"/>
+    </inferredMetricsTieBreakers>
+</document>
