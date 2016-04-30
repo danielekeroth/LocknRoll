@@ -31,64 +31,23 @@ extension SKScene {
 
 class ClassicGameScene: SKScene,ALAdVideoPlaybackDelegate
 {
-    // Sprite Nodes
     var Helper : GameHelper
     
     override init() {
-        if NSUserDefaults.standardUserDefaults().stringForKey("currentGameMode") == "Endless"
-        {
-            Helper = GameHelper(mode: .ClassicEndless)
-            Answers.logLevelStart("Classic Endless", customAttributes: nil)
-        }
-        else if NSUserDefaults.standardUserDefaults().stringForKey("currentGameMode") == "Hardcore"
-        {
-            Helper = GameHelper(mode: .HardcoreClassic)
-            Answers.logLevelStart("Classic Hardcore", customAttributes: nil)
-        }
-        else {
-            Helper = GameHelper(mode: .Classic)
-            Answers.logLevelStart("Classic", customAttributes: nil)
-        }
+        Helper = SceneHelper.InitializeGameScene("Classic")
         super.init()
         Helper.GameScene = self
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
-        if NSUserDefaults.standardUserDefaults().stringForKey("currentGameMode") == "Endless"
-        {
-            Helper = GameHelper(mode: .ClassicEndless)
-            Answers.logLevelStart("Classic Endless", customAttributes: nil)
-        }
-        else if NSUserDefaults.standardUserDefaults().stringForKey("currentGameMode") == "Hardcore"
-        {
-            Helper = GameHelper(mode: .HardcoreClassic)
-            Answers.logLevelStart("Classic Hardcore", customAttributes: nil)
-        }
-        else {
-            Helper = GameHelper(mode: .Classic)
-            Answers.logLevelStart("Classic", customAttributes: nil)
-        }
+        Helper = SceneHelper.InitializeGameScene("Classic")
         super.init(coder: aDecoder)
         Helper.GameScene = self
     }
     
     override required init(size: CGSize)
     {
-        if NSUserDefaults.standardUserDefaults().stringForKey("currentGameMode") == "Endless"
-        {
-            Helper = GameHelper(mode: .ClassicEndless)
-            Answers.logLevelStart("Classic Endless", customAttributes: nil)
-        }
-        else if NSUserDefaults.standardUserDefaults().stringForKey("currentGameMode") == "Hardcore"
-        {
-            Helper = GameHelper(mode: .HardcoreClassic)
-            Answers.logLevelStart("Classic Hardcore", customAttributes: nil)
-        }
-        else {
-            Helper = GameHelper(mode: .Classic)
-            Answers.logLevelStart("Classic", customAttributes: nil)
-        }
+        Helper = SceneHelper.InitializeGameScene("Classic")
         super.init(size: size)
         Helper.GameScene = self
     }
@@ -104,14 +63,10 @@ class ClassicGameScene: SKScene,ALAdVideoPlaybackDelegate
         
         if Helper.Person.intersectsNode(Helper.Dot){
             Helper.intersected = true
-            
         }
-        else{
-            if Helper.intersected == true{
-                if Helper.Person.intersectsNode(Helper.Dot) == false{
-                    Helper.died()
-                }
-            }
+        else if Helper.intersected == true && Helper.Person.intersectsNode(Helper.Dot) == false
+        {
+            Helper.died()
         }
     }
 }

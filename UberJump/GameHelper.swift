@@ -14,6 +14,7 @@ import GameKit
 
 public class GameHelper
 {
+    
     init(mode: GameModes){
         self.gameMode = mode
     }
@@ -74,7 +75,7 @@ public class GameHelper
         }
         self.currentColor = colors[nextColorIndex]
         currentColorIndex = nextColorIndex
-
+        
         let contrastValue = (self.currentColor.getComponents().r*299)+(self.currentColor.getComponents().g*587)+(self.currentColor.getComponents().b*114)
         if (contrastValue/1000) > 125
         {
@@ -398,35 +399,35 @@ public class GameHelper
             Range.position = CGPoint(x: 0,y:198)
             Circle.zRotation = angles[1]
         }
-            self.Circle.addChild(self.Range)
+        self.Circle.addChild(self.Range)
     }
     
     func AddDotClassic() {
-            Dot = SKShapeNode(circleOfRadius: 30)
-            Dot.antialiased = true
-            Dot.fillColor =  SKColor.init(red: 0.909, green: 0.901, blue: 0.137, alpha: 1.0)
-            Dot.strokeColor = SKColor.init(red: 0.909, green: 0.901, blue: 0.137, alpha: 1.0)
-            Dot.zPosition = 3.0
+        Dot = SKShapeNode(circleOfRadius: 30)
+        Dot.antialiased = true
+        Dot.fillColor =  SKColor.init(red: 0.909, green: 0.901, blue: 0.137, alpha: 1.0)
+        Dot.strokeColor = SKColor.init(red: 0.909, green: 0.901, blue: 0.137, alpha: 1.0)
+        Dot.zPosition = 3.0
+        
+        let dx = Person.position.x - GameScene.frame.width / 2
+        let dy = Person.position.y - GameScene.frame.height / 2
+        
+        let rad = atan2(dy, dx)
+        
+        if movingClockwise == true{
+            let tempAngle = CGFloat.Random(min: rad - 1.0, max: rad - 2.5)
+            let Path2 = UIBezierPath(arcCenter: CGPoint(x: GameScene.frame.width / 2, y: GameScene.frame.height / 2), radius: 202, startAngle: tempAngle, endAngle: tempAngle + CGFloat(M_PI * 4), clockwise: true)
+            Dot.position = Path2.currentPoint
             
-            let dx = Person.position.x - GameScene.frame.width / 2
-            let dy = Person.position.y - GameScene.frame.height / 2
+        }
+        else if movingClockwise == false{
+            let tempAngle = CGFloat.Random(min: rad + 1.0, max: rad + 2.5)
+            let Path2 = UIBezierPath(arcCenter: CGPoint(x: GameScene.frame.width / 2, y: GameScene.frame.height / 2), radius: 202, startAngle: tempAngle, endAngle: tempAngle + CGFloat(M_PI * 4), clockwise: true)
+            Dot.position = Path2.currentPoint
             
-            let rad = atan2(dy, dx)
             
-            if movingClockwise == true{
-                let tempAngle = CGFloat.Random(min: rad - 1.0, max: rad - 2.5)
-                let Path2 = UIBezierPath(arcCenter: CGPoint(x: GameScene.frame.width / 2, y: GameScene.frame.height / 2), radius: 202, startAngle: tempAngle, endAngle: tempAngle + CGFloat(M_PI * 4), clockwise: true)
-                Dot.position = Path2.currentPoint
-                
-            }
-            else if movingClockwise == false{
-                let tempAngle = CGFloat.Random(min: rad + 1.0, max: rad + 2.5)
-                let Path2 = UIBezierPath(arcCenter: CGPoint(x: GameScene.frame.width / 2, y: GameScene.frame.height / 2), radius: 202, startAngle: tempAngle, endAngle: tempAngle + CGFloat(M_PI * 4), clockwise: true)
-                Dot.position = Path2.currentPoint
-                
-                
-            }
-            GameScene.addChild(Dot)
+        }
+        GameScene.addChild(Dot)
     }
     
     func AddDot()
