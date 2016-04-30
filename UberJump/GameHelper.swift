@@ -14,7 +14,6 @@ import GameKit
 
 public class GameHelper
 {
-    
     init(mode: GameModes){
         self.gameMode = mode
     }
@@ -77,22 +76,12 @@ public class GameHelper
         currentColorIndex = nextColorIndex
         
         let contrastValue = (self.currentColor.getComponents().r*299)+(self.currentColor.getComponents().g*587)+(self.currentColor.getComponents().b*114)
-        if (contrastValue/1000) > 125
-        {
-            HighscoreLabel.textColor = UIColor.blackColor()
-            LevelLabel.textColor = UIColor.blackColor()
-            self.FirstDigit.fontColor = UIColor.blackColor()
-            self.SecondDigit.fontColor = UIColor.blackColor()
-            self.ThirdDigit.fontColor = UIColor.blackColor()
-        }
-        else
-        {
-            HighscoreLabel.textColor = UIColor.whiteColor()
-            LevelLabel.textColor = UIColor.whiteColor()
-            self.FirstDigit.fontColor = UIColor.whiteColor()
-            self.SecondDigit.fontColor = UIColor.whiteColor()
-            self.ThirdDigit.fontColor = UIColor.whiteColor()
-        }
+        let isBlack = contrastValue/100 > 125
+        HighscoreLabel.textColor = isBlack ? UIColor.blackColor() : UIColor.whiteColor()
+        LevelLabel.textColor = isBlack ? UIColor.blackColor() : UIColor.whiteColor()
+        self.FirstDigit.fontColor = isBlack ? UIColor.blackColor() : UIColor.whiteColor()
+        self.SecondDigit.fontColor = isBlack ? UIColor.blackColor() : UIColor.whiteColor()
+        self.ThirdDigit.fontColor = isBlack ? UIColor.blackColor() : UIColor.whiteColor()
         let action = SKAction.colorizeWithColor(self.currentColor, colorBlendFactor: 1.0, duration: 1.2)
         self.Canvas.removeActionForKey("colorize")
         self.GameScene.runAction(action, withKey: "colorize")
@@ -141,80 +130,59 @@ public class GameHelper
         }
     }
     
-    func LoadViewClassic() {
+    func LoadViewShared(yOffset: CGFloat)
+    {
         Canvas = SKSpriteNode(color: SKColor.clearColor(), size: CGSize(width: GameScene.frame.width, height: GameScene.frame.height))
         Canvas.position = CGPoint.init(x: CGRectGetMidX(GameScene.frame), y: CGRectGetMidY(GameScene.frame))
         Canvas.zPosition = 1
         GameScene.addChild(Canvas)
-        movingClockwise = true
         
-        PauseOverlay = SKSpriteNode(imageNamed: "PauseOverlay")
-        PauseOverlay.size = CGSize(width: GameScene.frame.width,height: GameScene.frame.height)
-        PauseOverlay.position = CGPoint.init(x: CGRectGetMidX(GameScene.frame), y: CGRectGetMidY(GameScene.frame))
-        PauseOverlay.alpha = 0.0
-        PauseOverlay.zPosition = 300.0
-        GameScene.addChild(PauseOverlay)
+        movingClockwise = true
         
         Circle = SKSpriteNode(imageNamed: "circle-shadow")
         Circle.size = CGSize(width: 500, height: 500)
-        Circle.position = CGPoint(x: CGRectGetMidX(GameScene.frame), y: CGRectGetMidY(GameScene.frame))
+        Circle.position = CGPoint(x: CGRectGetMidX(GameScene.frame), y: CGRectGetMidY(GameScene.frame)-yOffset)
         Circle.zPosition = 2.0
         GameScene.addChild(Circle)
         
         Person = SKShapeNode.init(rectOfSize: CGSize(width:62,height:9), cornerRadius: 4)
-        Person.fillColor = SKColor.init(red: 0.886, green: 0.231, blue: 0.231, alpha: 1.0)
-        Person.strokeColor = SKColor.init(red: 0.886, green: 0.231, blue: 0.231, alpha: 1.0)
-        Person.position = CGPoint(x: GameScene.frame.width / 2, y: GameScene.frame.height / 2 + 202)
-        Person.zRotation = 3.14 / 2
-        Person.zPosition = 4.0
-        GameScene.addChild(Person)
-        AddDot()
-    }
-    
-    func LoadViewModern() {
-        Canvas = SKSpriteNode(color: SKColor.clearColor(), size: CGSize(width: GameScene.frame.width, height: GameScene.frame.height))
-        Canvas.position = CGPoint.init(x: CGRectGetMidX(GameScene.frame), y: CGRectGetMidY(GameScene.frame))
-        Canvas.zPosition = 1
-        GameScene.addChild(Canvas)
-        
-        movingClockwise = true
-        loadModernElements()
-        
-        Circle = SKSpriteNode(imageNamed: "circle-shadow")
-        Circle.size = CGSize(width: 500, height: 500)
-        Circle.position = CGPoint(x: CGRectGetMidX(GameScene.frame), y: CGRectGetMidY(GameScene.frame)-130)
-        Circle.zPosition = 2.0
-        GameScene.addChild(Circle)
-        
-        Person = SKShapeNode.init(rectOfSize: CGSize(width:62,height:10), cornerRadius: 5)
         Person.fillColor = SKColor.init(red: 0.803, green: 0.404, blue: 0.404, alpha: 1.0)
         Person.strokeColor = SKColor.init(red: 0.803, green: 0.404, blue: 0.404, alpha: 1.0)
         Person.position = CGPoint(x: GameScene.frame.width / 2, y: GameScene.frame.height / 2 + 72)
         Person.zRotation = 3.14 / 2
         Person.zPosition = 2.0
         GameScene.addChild(Person)
+    }
+    
+    func LoadViewClassic() {
+        LoadViewShared(0)
         AddDot()
     }
     
-    func LoadView(reset: Bool = false) {
-        if colors.count == 0 {
-            self.colors.append(UIColor(red: CGFloat(Double(207.0/255.0)), green: CGFloat(Double(240.0/255.0)), blue: CGFloat(Double(158.0/255.0)), alpha: 1.00))
-            self.colors.append(UIColor(red: CGFloat(Double(168.0/255.0)), green: CGFloat(Double(219.0/255.0)), blue: CGFloat(Double(168.0/255.0)), alpha: 1.00))
-            self.colors.append(UIColor(red: CGFloat(Double(100.0/255.0)), green: CGFloat(Double(223.0/255.0)), blue: CGFloat(Double(216.0/255.0)), alpha: 1.00))
-            self.colors.append(UIColor(red: CGFloat(Double(227.0/255.0)), green: CGFloat(Double(158.0/255.0)), blue: CGFloat(Double(176.0/255.0)), alpha: 1.00))
-            self.colors.append(UIColor(red: CGFloat(Double(78.0/255.0)), green: CGFloat(Double(125.0/255.0)), blue: CGFloat(Double(44.0/255.0)), alpha: 1.00))
-            self.colors.append(UIColor(red: CGFloat(Double(181.0/255.0)), green: CGFloat(Double(217.0/255.0)), blue: CGFloat(Double(24.0/255.0)), alpha: 1.00))
-            self.colors.append(UIColor(red: CGFloat(Double(6.0/255.0)), green: CGFloat(Double(176.0/255.0)), blue: CGFloat(Double(223.0/255.0)), alpha: 1.00))
-            self.colors.append(UIColor(red: CGFloat(Double(147.0/255.0)), green: CGFloat(Double(155.0/255.0)), blue: CGFloat(Double(197.0/255.0)), alpha: 1.00))
-            currentColorIndex = Int(floor(Double(currentLevel/10)))
-            if currentColorIndex == colors.endIndex
-            {
-                currentColorIndex = 0
-            }
-            currentColor = colors[currentColorIndex]
+    func LoadViewModern() {
+        LoadViewShared(130)
+        loadModernElements()
+        AddDot()
+    }
+    
+    func InitializeColors() {
+        self.colors.append(UIColor(red: CGFloat(Double(207.0/255.0)), green: CGFloat(Double(240.0/255.0)), blue: CGFloat(Double(158.0/255.0)), alpha: 1.00))
+        self.colors.append(UIColor(red: CGFloat(Double(168.0/255.0)), green: CGFloat(Double(219.0/255.0)), blue: CGFloat(Double(168.0/255.0)), alpha: 1.00))
+        self.colors.append(UIColor(red: CGFloat(Double(100.0/255.0)), green: CGFloat(Double(223.0/255.0)), blue: CGFloat(Double(216.0/255.0)), alpha: 1.00))
+        self.colors.append(UIColor(red: CGFloat(Double(227.0/255.0)), green: CGFloat(Double(158.0/255.0)), blue: CGFloat(Double(176.0/255.0)), alpha: 1.00))
+        self.colors.append(UIColor(red: CGFloat(Double(78.0/255.0)), green: CGFloat(Double(125.0/255.0)), blue: CGFloat(Double(44.0/255.0)), alpha: 1.00))
+        self.colors.append(UIColor(red: CGFloat(Double(181.0/255.0)), green: CGFloat(Double(217.0/255.0)), blue: CGFloat(Double(24.0/255.0)), alpha: 1.00))
+        self.colors.append(UIColor(red: CGFloat(Double(6.0/255.0)), green: CGFloat(Double(176.0/255.0)), blue: CGFloat(Double(223.0/255.0)), alpha: 1.00))
+        self.colors.append(UIColor(red: CGFloat(Double(147.0/255.0)), green: CGFloat(Double(155.0/255.0)), blue: CGFloat(Double(197.0/255.0)), alpha: 1.00))
+        currentColorIndex = Int(floor(Double(currentLevel/10)))
+        if currentColorIndex == colors.endIndex
+        {
+            currentColorIndex = 0
         }
-        NSUserDefaults.standardUserDefaults().setBool(true, forKey: gameMode.rawValue + "Played")
-        currentGameMode = NSUserDefaults.standardUserDefaults().stringForKey("currentGameMode")!
+        currentColor = colors[currentColorIndex]
+    }
+    
+    func AddScoreHolder() {
         scoreHolder = UIStackView()
         scoreHolder.alignment = UIStackViewAlignment.Fill
         scoreHolder.axis = UILayoutConstraintAxis.Horizontal
@@ -226,15 +194,51 @@ public class GameHelper
         scoreHolder.translatesAutoresizingMaskIntoConstraints = false
         scoreHolder.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.0)
         GameScene.view?.addSubview(scoreHolder)
+        let yOffset = (gameMode == .HardcoreModern || gameMode == .ModernEndless || gameMode == .Modern) ? 130 : 0
+        GameScene.view?.addConstraint(NSLayoutConstraint.init(item: self.scoreHolder, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.GameScene.view, attribute: NSLayoutAttribute.CenterX, multiplier: CGFloat(1),constant: CGFloat(0)))
+        GameScene.view?.addConstraint(NSLayoutConstraint.init(item: self.scoreHolder, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self.GameScene.view, attribute: NSLayoutAttribute.CenterY, multiplier: CGFloat(1),constant: CGFloat(yOffset)))
+    }
+    
+    func AddLevelLabel() {
+        LevelLabel = UILabel(frame: CGRect(x:40,y:40,width: 600,height:100))
+        LevelLabel.text = "Level: \(currentLevel)"
+        LevelLabel.textColor = UIColor.whiteColor()
+        LevelLabel.font = UIFont.systemFontOfSize(60)
+        GameScene.view?.addSubview(LevelLabel)
+    }
+    
+    func AddHighscoreLabel() {
+        HighscoreLabel = UILabel(frame: CGRect(x: 0, y: 40, width: 1920, height: 100))
+        HighscoreLabel.text = "Highscore: \(NSUserDefaults.standardUserDefaults().integerForKey(gameMode.rawValue + "Highscore"))"
+        HighscoreLabel.textColor = UIColor.whiteColor()
+        HighscoreLabel.textAlignment = NSTextAlignment.Center
+        HighscoreLabel.font = UIFont.systemFontOfSize(60)
+        GameScene.view?.addSubview(HighscoreLabel)
+    }
+    
+    
+    func AddPauseOverlay() {
+        PauseOverlay = SKSpriteNode(imageNamed: "PauseOverlay")
+        PauseOverlay.size = CGSize(width: GameScene.frame.width,height: GameScene.frame.height)
+        PauseOverlay.position = CGPoint.init(x: CGRectGetMidX(GameScene.frame), y: CGRectGetMidY(GameScene.frame))
+        PauseOverlay.alpha = 0.0
+        PauseOverlay.zPosition = 100.0
+        GameScene.addChild(PauseOverlay)
+    }
+    
+    func LoadView(reset: Bool = false) {
+        if colors.count == 0 {
+            InitializeColors()
+        }
+        NSUserDefaults.standardUserDefaults().setBool(true, forKey: gameMode.rawValue + "Played")
+        currentGameMode = NSUserDefaults.standardUserDefaults().stringForKey("currentGameMode")!
+        AddScoreHolder()
+        AddPauseOverlay()
         switch gameMode
         {
         case GameModes.HardcoreModern, GameModes.ModernEndless, GameModes.Modern:
-            GameScene.view?.addConstraint(NSLayoutConstraint.init(item: self.scoreHolder, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.GameScene.view, attribute: NSLayoutAttribute.CenterX, multiplier: CGFloat(1),constant: CGFloat(0)))
-            GameScene.view?.addConstraint(NSLayoutConstraint.init(item: self.scoreHolder, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self.GameScene.view, attribute: NSLayoutAttribute.CenterY, multiplier: CGFloat(1),constant: CGFloat(130)))
             LoadViewModern()
         case GameModes.ClassicEndless, GameModes.Classic, GameModes.HardcoreClassic:
-            GameScene.view?.addConstraint(NSLayoutConstraint.init(item: self.scoreHolder, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.GameScene.view, attribute: NSLayoutAttribute.CenterX, multiplier: CGFloat(1),constant: CGFloat(0)))
-            GameScene.view?.addConstraint(NSLayoutConstraint.init(item: self.scoreHolder, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self.GameScene.view, attribute: NSLayoutAttribute.CenterY, multiplier: CGFloat(1),constant: CGFloat(0)))
             LoadViewClassic()
         }
         
@@ -243,33 +247,28 @@ public class GameHelper
         
         if gameMode == .Modern || gameMode == .Classic || gameMode == .HardcoreClassic || gameMode == .HardcoreModern
         {
-            LevelLabel = UILabel(frame: CGRect(x:40,y:40,width: 600,height:100))
-            LevelLabel.text = "Level: \(currentLevel)"
-            LevelLabel.textColor = UIColor.whiteColor()
-            LevelLabel.font = UIFont.systemFontOfSize(60)
-            GameScene.view?.addSubview(LevelLabel)
+            AddLevelLabel()
         }
         
         if gameMode == .ModernEndless || gameMode == .ClassicEndless || gameMode == .HardcoreClassic || gameMode == .HardcoreModern
         {
-            HighscoreLabel = UILabel(frame: CGRect(x: 0, y: 40, width: 1920, height: 100))
-            HighscoreLabel.text = "Highscore: \(NSUserDefaults.standardUserDefaults().integerForKey(gameMode.rawValue + "Highscore"))"
-            HighscoreLabel.textColor = UIColor.whiteColor()
-            HighscoreLabel.textAlignment = NSTextAlignment.Center
-            HighscoreLabel.font = UIFont.systemFontOfSize(60)
-            GameScene.view?.addSubview(HighscoreLabel)
+            AddHighscoreLabel()
         }
         
+        
+        if !reset
+        {
+            ColorizeCanvas()
+        }
+    }
+    
+    func AddTapRecognizers() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(GameHelper.selectTapped(_:)))
         tap.allowedPressTypes = [NSNumber(integer: UIPressType.Select.rawValue)]
         GameScene.view!.addGestureRecognizer(tap)
         let tap2 = UITapGestureRecognizer(target: self, action: #selector(GameHelper.playPauseTapped(_:)))
         tap2.allowedPressTypes = [NSNumber(integer: UIPressType.PlayPause.rawValue)]
         GameScene.view!.addGestureRecognizer(tap2)
-        if !reset
-        {
-            ColorizeCanvas()
-        }
     }
     
     func SetDigitProperties(control : NumberMorphView) -> NumberMorphView {
@@ -324,7 +323,7 @@ public class GameHelper
             {
                 SecondDigit.animateToDigit(digit)
             }
-            else if iteration == 3
+            else if iteration == 2
             {
                 ThirdDigit.animateToDigit(digit)
             }
@@ -333,13 +332,6 @@ public class GameHelper
     }
     
     func loadModernElements() {
-        PauseOverlay = SKSpriteNode(imageNamed: "PauseOverlay")
-        PauseOverlay.size = CGSize(width: GameScene.frame.width,height: GameScene.frame.height)
-        PauseOverlay.position = CGPoint.init(x: CGRectGetMidX(GameScene.frame), y: CGRectGetMidY(GameScene.frame))
-        PauseOverlay.alpha = 0.0
-        PauseOverlay.zPosition = 100.0
-        GameScene.addChild(PauseOverlay)
-        
         Dial = SKSpriteNode(imageNamed: "Dial")
         Dial.size = CGSize(width: 300, height: 300)
         Dial.position = CGPoint(x: 0, y: 0-130)
@@ -376,10 +368,7 @@ public class GameHelper
         Range.size = CGSize(width: 130, height: 104)
         Range.zPosition = 5.0
         
-        let dx = Person.position.x - GameScene.frame.width / 2
-        let dy = Person.position.y - GameScene.frame.height / 2
-        
-        let rad = atan2(dy, dx)
+        let rad = getRad()
         
         if movingClockwise == true{
             var angles = calculateAngles(rad, clockwise: true)
@@ -402,6 +391,14 @@ public class GameHelper
         self.Circle.addChild(self.Range)
     }
     
+    func getRad() -> CGFloat {
+        let dx = Person.position.x - GameScene.frame.width / 2
+        let dy = Person.position.y - GameScene.frame.height / 2
+        
+        let rad = atan2(dy, dx)
+        return rad
+    }
+    
     func AddDotClassic() {
         Dot = SKShapeNode(circleOfRadius: 30)
         Dot.antialiased = true
@@ -409,24 +406,10 @@ public class GameHelper
         Dot.strokeColor = SKColor.init(red: 0.909, green: 0.901, blue: 0.137, alpha: 1.0)
         Dot.zPosition = 3.0
         
-        let dx = Person.position.x - GameScene.frame.width / 2
-        let dy = Person.position.y - GameScene.frame.height / 2
-        
-        let rad = atan2(dy, dx)
-        
-        if movingClockwise == true{
-            let tempAngle = CGFloat.Random(min: rad - 1.0, max: rad - 2.5)
-            let Path2 = UIBezierPath(arcCenter: CGPoint(x: GameScene.frame.width / 2, y: GameScene.frame.height / 2), radius: 202, startAngle: tempAngle, endAngle: tempAngle + CGFloat(M_PI * 4), clockwise: true)
-            Dot.position = Path2.currentPoint
-            
-        }
-        else if movingClockwise == false{
-            let tempAngle = CGFloat.Random(min: rad + 1.0, max: rad + 2.5)
-            let Path2 = UIBezierPath(arcCenter: CGPoint(x: GameScene.frame.width / 2, y: GameScene.frame.height / 2), radius: 202, startAngle: tempAngle, endAngle: tempAngle + CGFloat(M_PI * 4), clockwise: true)
-            Dot.position = Path2.currentPoint
-            
-            
-        }
+        let rad = getRad()
+        let tempAngle = movingClockwise ? CGFloat.Random(min: rad - 1.0, max: rad - 2.5) : CGFloat.Random(min: rad + 1.0, max: rad + 2.5)
+        let Path2 = UIBezierPath(arcCenter: CGPoint(x: GameScene.frame.width / 2, y: GameScene.frame.height / 2), radius: 202, startAngle: tempAngle, endAngle: tempAngle + CGFloat(M_PI * 4), clockwise: true)
+        Dot.position = Path2.currentPoint
         GameScene.addChild(Dot)
     }
     
@@ -442,14 +425,7 @@ public class GameHelper
     }
     func calculateAngles(rad: CGFloat,clockwise: Bool) -> [CGFloat]
     {
-        var tempAngle = CGFloat()
-        if clockwise == true {
-            tempAngle = CGFloat.Random(min: rad - 1.0, max: rad + 3.5)
-        }
-        else if clockwise == false
-        {
-            tempAngle = CGFloat.Random(min: rad + 1.0, max: rad + 3.5)
-        }
+        let tempAngle = clockwise ? CGFloat.Random(min: rad - 1.0, max: rad - 3.5) : CGFloat.Random(min: rad + 1.0, max: rad + 3.5)
         let endAngle = tempAngle + CGFloat(M_PI*4)
         var angles = [CGFloat]()
         angles.append(tempAngle);
@@ -478,7 +454,7 @@ public class GameHelper
         self.Dial.runAction(repeatAction)
     }
     
-    func moveClockWiseClassic(){
+    func moveClassic(clockwise: Bool){
         
         let dx = Person.position.x - GameScene.frame.width / 2
         let dy = Person.position.y - GameScene.frame.height / 2
@@ -487,19 +463,13 @@ public class GameHelper
         
         Path = UIBezierPath(arcCenter: CGPoint(x: GameScene.frame.width / 2, y: GameScene.frame.height / 2), radius: 202, startAngle: rad, endAngle: rad + CGFloat(M_PI * 4), clockwise: true)
         let follow = SKAction.followPath(Path.CGPath, asOffset: false, orientToPath: true, speed: gameSpeed)
-        Person.runAction(SKAction.repeatActionForever(follow).reversedAction())
-    }
-    
-    func moveCounterClockWiseClassic()
-    {
-        let dx = Person.position.x - GameScene.frame.width / 2
-        let dy = Person.position.y - GameScene.frame.height / 2
-        
-        let rad = atan2(dy, dx)
-        
-        Path = UIBezierPath(arcCenter: CGPoint(x: GameScene.frame.width / 2, y: GameScene.frame.height / 2), radius: 202, startAngle: rad, endAngle: rad + CGFloat(M_PI * 4), clockwise: true)
-        let follow = SKAction.followPath(Path.CGPath, asOffset: false, orientToPath: true, speed: gameSpeed)
-        Person.runAction(SKAction.repeatActionForever(follow))
+        switch clockwise
+        {
+        case true:
+            Person.runAction(SKAction.repeatActionForever(follow).reversedAction())
+        case false:
+            Person.runAction(SKAction.repeatActionForever(follow))
+        }
     }
     
     func moveCounterClockWiseModern() {
@@ -515,7 +485,7 @@ public class GameHelper
         switch gameMode
         {
         case .Classic, .ClassicEndless, .HardcoreClassic:
-            moveClockWiseClassic()
+            moveClassic(true)
         case .Modern, .ModernEndless,.HardcoreModern:
             moveClockWiseModern()
         }
@@ -525,11 +495,12 @@ public class GameHelper
         switch gameMode
         {
         case .Classic, .ClassicEndless, .HardcoreClassic:
-            moveCounterClockWiseClassic()
+            moveClassic(false)
         case .Modern, .ModernEndless,.HardcoreModern:
             moveCounterClockWiseModern()
         }
     }
+    
     @objc func playPauseTapped(gesture: UITapGestureRecognizer) {
         if !gameStarted {
             return
@@ -568,23 +539,18 @@ public class GameHelper
         }
         else if gameStarted == true{
             numberOfClicks += 1
-            if movingClockwise == true{
-                
+            if movingClockwise == true
+            {
                 moveCounterClockWise()
-                movingClockwise = false
             }
-            else if movingClockwise == false{
-                
+            else if movingClockwise == false
+            {
                 moveClockWise()
-                movingClockwise = true
             }
+            movingClockwise = !movingClockwise
             DotTouched()
         }
     }
-    
-    
-    
-    
     
     func DotTouched(){
         if (gameMode == .ClassicEndless || gameMode == .ModernEndless) && totalClicks > 30
@@ -620,19 +586,22 @@ public class GameHelper
         }
     }
     
-    func nextLevel(){
-        currentLevel += 1
-        if currentLevel % 10 == 0 {
-            ColorizeCanvas()
-        }
+    func updateGameSpeed() {
         gameSpeed = CGFloat(400+(currentLevel*2))
         if(gameSpeed > 600)
         {
             gameSpeed = 600
         }
+    }
+    
+    func nextLevel(){
+        currentLevel += 1
+        if currentLevel % 10 == 0 {
+            ColorizeCanvas()
+        }
+        updateGameSpeed()
         currentScore = currentLevel
         won()
-        
         // If the current level is larger than the highscore
         if currentLevel > highLevel{
             // Update highLevel
@@ -641,51 +610,37 @@ public class GameHelper
             Defaults.setInteger(highLevel, forKey: gameMode.rawValue + "Highscore")
             
             // Submit to leaderboard
-            switch gameMode
-            {
-            case GameModes.Modern:
-                GCHelper.saveHighScore(highLevel, leaderboardId: Leaderboards.Modern)
-            case GameModes.HardcoreModern:
-                GCHelper.saveHighScore(highLevel, leaderboardId: Leaderboards.ModernHardcore)
-            case GameModes.Classic:
-                GCHelper.saveHighScore(highLevel, leaderboardId: Leaderboards.Classic)
-            case GameModes.HardcoreClassic:
-                GCHelper.saveHighScore(highLevel, leaderboardId: Leaderboards.ClassicHardcore)
-            case GameModes.ClassicEndless:
-                GCHelper.saveHighScore(highLevel, leaderboardId: Leaderboards.ClassicEndless)
-            case GameModes.ModernEndless:
-                GCHelper.saveHighScore(highLevel, leaderboardId: Leaderboards.ModernEndless)
-            }
+            UpdateLeaderboards()
             GCHelper.StoreAchievement(AchievementHelper.TenLocksAchievementID, number: highLevel, goal: 10)
             GCHelper.StoreAchievement(AchievementHelper.TwentyFiveLocksAchievementID, number: highLevel, goal: 25)
             GCHelper.StoreAchievement(AchievementHelper.FiftyLocksAchievementID, number: highLevel, goal: 50)
         }
     }
     
-    func diedClassic() {
-        GameScene.removeAllChildren()
-        intersected = false
-        gameStarted = false
-        currentScore = currentLevel
-        self.LoadView(true)
+    
+    
+    func UpdateLeaderboards()
+    {
+        switch gameMode
+        {
+        case .Classic:
+            GCHelper.saveHighScore(currentScore, leaderboardId: Leaderboards.Classic)
+        case .ClassicEndless:
+            GCHelper.saveHighScore(currentScore, leaderboardId: Leaderboards.ClassicEndless)
+        case .HardcoreClassic:
+            GCHelper.saveHighScore(currentScore, leaderboardId: Leaderboards.ClassicHardcore)
+        case .HardcoreModern:
+            GCHelper.saveHighScore(currentScore, leaderboardId: Leaderboards.ModernHardcore)
+        case .Modern:
+            GCHelper.saveHighScore(currentScore, leaderboardId: Leaderboards.Modern)
+        case .ModernEndless:
+            GCHelper.saveHighScore(currentScore, leaderboardId: Leaderboards.ModernEndless)
+        }
     }
     
-    func diedModern() {
-        Range.removeFromParent()
-        ClearActions()
-        self.intersected = false
-        self.gameStarted = false
-        let shakeAction = SKAction.shake(Canvas.position, duration: 2)
-        Canvas.runAction(shakeAction,completion: {
-            self.scoreHolder.removeFromSuperview()
-            self.GameScene.removeAllChildren()
-            self.currentScore = self.currentLevel
-            self.LoadView(true)
-        })
-    }
-    
-    func died(){
-        if ALInterstitialAd.isReadyForDisplay() && (deaths >= 5 || numberOfClicks >= 100) && NSUserDefaults.standardUserDefaults().boolForKey("removedAds") == false
+    func diedShared() {
+        totalClicks = 0
+        if ALInterstitialAd.isReadyForDisplay() && (deaths >= 10 || numberOfClicks >= 100) && NSUserDefaults.standardUserDefaults().boolForKey("removedAds") == false
         {
             deaths = 0
             numberOfClicks = 0
@@ -700,40 +655,54 @@ public class GameHelper
         let currentHigh = NSUserDefaults.standardUserDefaults().integerForKey(gameMode.rawValue + "Highscore")
         if currentScore > currentHigh
         {
-            switch gameMode
-            {
-            case .Classic:
-                GCHelper.saveHighScore(currentScore, leaderboardId: Leaderboards.Classic)
-            case .ClassicEndless:
-                GCHelper.saveHighScore(currentScore, leaderboardId: Leaderboards.ClassicEndless)
-            case .HardcoreClassic:
-                GCHelper.saveHighScore(currentScore, leaderboardId: Leaderboards.ClassicHardcore)
-            case .HardcoreModern:
-                GCHelper.saveHighScore(currentScore, leaderboardId: Leaderboards.ModernHardcore)
-            case .Modern:
-                GCHelper.saveHighScore(currentScore, leaderboardId: Leaderboards.Modern)
-            case .ModernEndless:
-                GCHelper.saveHighScore(currentScore, leaderboardId: Leaderboards.ModernEndless)
-            }
+            UpdateLeaderboards()
             NSUserDefaults.standardUserDefaults().setInteger(currentScore, forKey: gameMode.rawValue + "Highscore")
         }
         if(self.gameMode == GameModes.HardcoreClassic || self.gameMode == GameModes.HardcoreModern)
         {
-            
-            // Set currentlevel and currentscore to 1
             self.currentLevel = 1
             self.currentScore = 1
         }
         let soundAction = SKAction.playSoundFileNamed("FAIL.wav", waitForCompletion: false)
         self.GameScene.runAction(soundAction)
+        GameScene.removeAllChildren()
+        intersected = false
+        gameStarted = false
+        let shakeAction = SKAction.shake(Canvas.position, duration: 2)
+        Canvas.runAction(shakeAction,completion: {
+            self.scoreHolder.removeFromSuperview()
+            self.GameScene.removeAllChildren()
+            self.currentScore = self.currentLevel
+            self.LoadView(true)
+        })
+    }
+    
+    func diedModern() {
+        ClearActions()
+        diedShared()
+    }
+    
+    func died(){
         switch gameMode {
         case .ModernEndless, .Modern, .HardcoreModern:
             diedModern()
         case .ClassicEndless, .Classic, .HardcoreClassic:
-            diedClassic()
+            diedShared()
         }
     }
-    func wonClassic(){
+    
+    func wonShared()
+    {
+        self.LevelLabel.removeFromSuperview()
+        self.HighscoreLabel.removeFromSuperview()
+        let soundAction = SKAction.playSoundFileNamed("winning.wav", waitForCompletion: false)
+        self.GameScene.runAction(soundAction)
+        if ALInterstitialAd.isReadyForDisplay() && (numberOfClicks >= 100 || deaths >= 10) && NSUserDefaults.standardUserDefaults().boolForKey("removedAds") == false
+        {
+            numberOfClicks = 0
+            deaths = 0
+            ShowAd()
+        }
         GameScene.removeAllChildren()
         intersected = false
         gameStarted = false
@@ -745,30 +714,16 @@ public class GameHelper
         let lockAction = SKAction.moveByX(0, y: 120, duration: 1.0)
         Lock.runAction(lockAction, completion: {
             self.Lock.runAction(lockAction.reversedAction(),completion: {
-                self.scoreHolder.removeFromSuperview()
-                self.GameScene.removeAllChildren()
-                self.intersected = false
-                self.gameStarted = false
-                self.LoadView(true)
+                self.wonShared()
             })
         })
     }
     
     func won(){
-        self.LevelLabel.removeFromSuperview()
-        self.HighscoreLabel.removeFromSuperview()
-        let soundAction = SKAction.playSoundFileNamed("winning.wav", waitForCompletion: false)
-        self.GameScene.runAction(soundAction)
-        if ALInterstitialAd.isReadyForDisplay() && (numberOfClicks >= 100 || deaths >= 5) && NSUserDefaults.standardUserDefaults().boolForKey("removedAds") == false
-        {
-            numberOfClicks = 0
-            deaths = 0
-            ShowAd()
-        }
         switch gameMode
         {
         case .Classic, .ClassicEndless, .HardcoreClassic:
-            wonClassic()
+            wonShared()
         case .Modern, .ModernEndless, .HardcoreModern:
             wonModern()
         }
