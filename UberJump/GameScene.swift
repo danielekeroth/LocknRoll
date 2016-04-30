@@ -29,7 +29,7 @@ extension SKScene {
     }
 }
 
-class GameScene: SKScene,ALAdVideoPlaybackDelegate
+class AllGameScene : SKScene,ALAdVideoPlaybackDelegate
 {
     // Sprite Nodes
     var Helper : GameHelper?

@@ -74,7 +74,7 @@ public class GameHelper : NodeCollection
     func ShowAd() {
         self.deaths = 0
         self.numberOfClicks = 0
-        let scene = self.GameScene as! GameScene
+        let scene = self.GameScene as! AllGameScene
         scene.ShowAd()
     }
     

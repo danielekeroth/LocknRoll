@@ -16,7 +16,7 @@ class GameController: UIViewController {
     var segueId = "";
     override func viewDidLoad() {
         super.viewDidLoad()
-        (self.view as! SKView).presentScene(GameScene(size: self.view.bounds.size, mode: segueId))
+        (self.view as! SKView).presentScene(AllGameScene(size: self.view.bounds.size, mode: segueId))
     }
     
     override func didReceiveMemoryWarning() {
