@@ -12,28 +12,6 @@ import SpriteKit
 import AVKit
 import GameKit
 
-public class NodeCollection : UICollection {
-    var Circle = SKSpriteNode()
-    var Person = SKShapeNode()
-    var Dot = SKShapeNode()
-    var Dial = SKSpriteNode()
-    var Digits = SKSpriteNode()
-    var Arrow = SKSpriteNode()
-    var Range = SKSpriteNode()
-    var Outer = SKSpriteNode()
-    var Lock = SKSpriteNode()
-    var PauseOverlay = SKSpriteNode()
-    var Canvas = SKSpriteNode()
-}
-
-public class UICollection
-{
-    var scoreHolder = UIStackView()
-    var GameScene = SKScene()
-    var LevelLabel = UILabel()
-    var HighscoreLabel = UILabel()
-}
-
 public class GameHelper : NodeCollection
 {
     init(mode: GameModes){
@@ -163,18 +141,6 @@ public class GameHelper : NodeCollection
         GameScene.addChild(Person)
     }
     
-    func LoadViewClassic() {
-        LoadViewShared(0)
-        AddPerson(202, zPos: 4.0)
-        AddDot()
-    }
-    
-    func LoadViewModern() {
-        LoadViewShared(130)
-        AddPerson(72, zPos: 2.0)
-        loadModernElements()
-        AddDot()
-    }
     
     func InitializeColors() {
         self.colors.append(UIColor(red: CGFloat(Double(207.0/255.0)), green: CGFloat(Double(240.0/255.0)), blue: CGFloat(Double(158.0/255.0)), alpha: 1.00))
@@ -237,6 +203,8 @@ public class GameHelper : NodeCollection
         GameScene.addChild(PauseOverlay)
     }
     
+    var isModern = false
+    
     func LoadView(reset: Bool = false) {
         if colors.count == 0 {
             InitializeColors()
@@ -245,13 +213,11 @@ public class GameHelper : NodeCollection
         currentGameMode = NSUserDefaults.standardUserDefaults().stringForKey("currentGameMode")!
         AddScoreHolder()
         AddPauseOverlay()
-        switch gameMode
-        {
-        case GameModes.HardcoreModern, GameModes.ModernEndless, GameModes.Modern:
-            LoadViewModern()
-        case GameModes.ClassicEndless, GameModes.Classic, GameModes.HardcoreClassic:
-            LoadViewClassic()
-        }
+        isModern = (gameMode == .HardcoreModern || gameMode == .ModernEndless || gameMode == .Modern)
+        LoadViewShared(isModern ? 130 : 0)
+        AddPerson(isModern ? 72 : 202, zPos: isModern ? 2.0 : 4.0)
+        if isModern { loadModernElements() }
+        AddDot()
         
         CreateDigits()
         UpdateDigits()
@@ -265,7 +231,6 @@ public class GameHelper : NodeCollection
         {
             AddHighscoreLabel()
         }
-        
         
         if !reset
         {
@@ -391,14 +356,6 @@ public class GameHelper : NodeCollection
         self.Circle.addChild(self.Range)
     }
     
-    func getRad() -> CGFloat {
-        let dx = Person.position.x - GameScene.frame.width / 2
-        let dy = Person.position.y - GameScene.frame.height / 2
-        
-        let rad = atan2(dy, dx)
-        return rad
-    }
-    
     func AddDotClassic() {
         Dot = SKShapeNode(circleOfRadius: 30)
         Dot.antialiased = true
@@ -454,22 +411,14 @@ public class GameHelper : NodeCollection
         self.Dial.runAction(repeatAction)
     }
     
+    func getRad() -> CGFloat {
+        return atan2(Person.position.y - GameScene.frame.height / 2, Person.position.x - GameScene.frame.width / 2)
+    }
+    
     func moveClassic(clockwise: Bool){
-        
-        let dx = Person.position.x - GameScene.frame.width / 2
-        let dy = Person.position.y - GameScene.frame.height / 2
-        
-        let rad = atan2(dy, dx)
-        
-        Path = UIBezierPath(arcCenter: CGPoint(x: GameScene.frame.width / 2, y: GameScene.frame.height / 2), radius: 202, startAngle: rad, endAngle: rad + CGFloat(M_PI * 4), clockwise: true)
-        let follow = SKAction.followPath(Path.CGPath, asOffset: false, orientToPath: true, speed: gameSpeed)
-        switch clockwise
-        {
-        case true:
-            Person.runAction(SKAction.repeatActionForever(follow).reversedAction())
-        case false:
-            Person.runAction(SKAction.repeatActionForever(follow))
-        }
+        let rad = getRad()
+        let follow = SKAction.followPath((UIBezierPath(arcCenter: CGPoint(x: GameScene.frame.width / 2, y: GameScene.frame.height / 2), radius: 202, startAngle: rad, endAngle: rad + CGFloat(M_PI * 4), clockwise: true)).CGPath, asOffset: false, orientToPath: true, speed: gameSpeed)
+        if clockwise { Person.runAction(SKAction.repeatActionForever(follow).reversedAction()) } else { Person.runAction(SKAction.repeatActionForever(follow)) }
     }
     
     func moveCounterClockWiseModern() {
@@ -482,52 +431,23 @@ public class GameHelper : NodeCollection
     
     func moveClockWise()
     {
-        switch gameMode
-        {
-        case .Classic, .ClassicEndless, .HardcoreClassic:
-            moveClassic(true)
-        case .Modern, .ModernEndless,.HardcoreModern:
-            moveClockWiseModern()
-        }
+        if gameMode.rawValue.containsString("Classic") { moveClassic(true) } else { moveClockWiseModern() }
     }
     
     func moveCounterClockWise(){
-        switch gameMode
-        {
-        case .Classic, .ClassicEndless, .HardcoreClassic:
-            moveClassic(false)
-        case .Modern, .ModernEndless,.HardcoreModern:
-            moveCounterClockWiseModern()
-        }
+        if gameMode.rawValue.containsString("Classic") { moveClassic(false) } else { moveCounterClockWiseModern() }
     }
     
-    @objc func playPauseTapped(gesture: UITapGestureRecognizer) {
-        if !gameStarted {
-            return
-        }
-        if gamePaused == false
-        {
-            if gameMode == .ModernEndless || gameMode == .Modern || gameMode == .HardcoreModern
-            {
-                ClearActions()
-            }
-            Person.paused = true
-            scoreHolder.alpha = 0.0
-            let fadeInAction = SKAction.fadeInWithDuration(0.5)
-            PauseOverlay.runAction(fadeInAction)
-        }
-        else if gamePaused == true
-        {
-            let fadeOutAction = SKAction.fadeOutWithDuration(0.5)
-            PauseOverlay.runAction(fadeOutAction,completion: {
-                if self.gameMode == .ModernEndless || self.gameMode == .Modern || self.gameMode == .HardcoreModern
-                {
-                    self.StartActions(!self.movingClockwise)
-                }
-                self.scoreHolder.alpha = 1.0
-                self.Person.paused = false
-            })
-        }
+    @objc func playPauseTapped(gesture: UITapGestureRecognizer)
+    {
+        if !gameStarted { return }
+        let fadeInAction = SKAction.fadeInWithDuration(0.2)
+        let fadeOutAction = SKAction.fadeOutWithDuration(0.2)
+        PauseOverlay.runAction(gamePaused ? fadeInAction : fadeOutAction, completion: {
+            if self.gameMode.rawValue.containsString("Modern") && self.gamePaused { self.StartActions(!self.movingClockwise) } else if self.gameMode.rawValue.containsString("Modern") && !self.gamePaused { self.ClearActions() }
+            self.Person.paused = !self.gamePaused
+            self.scoreHolder.alpha = self.gamePaused ? 1.0 : 0.0
+        })
         gamePaused = !gamePaused
     }
     
@@ -539,14 +459,7 @@ public class GameHelper : NodeCollection
         }
         else if gameStarted == true{
             numberOfClicks += 1
-            if movingClockwise == true
-            {
-                moveCounterClockWise()
-            }
-            else if movingClockwise == false
-            {
-                moveClockWise()
-            }
+            if movingClockwise { moveCounterClockWise() } else { moveClockWise() }
             movingClockwise = !movingClockwise
             DotTouched()
         }
@@ -565,25 +478,15 @@ public class GameHelper : NodeCollection
             Dot.removeFromParent()
             Range.removeFromParent()
             intersected = false
-            if gameMode == GameModes.ClassicEndless || gameMode == GameModes.ModernEndless
-            {
-                currentScore += 1
-            }
-            else
-            {
-                currentScore -= 1
-            }
+            if gameMode == GameModes.ClassicEndless || gameMode == GameModes.ModernEndless { currentScore += 1 } else { currentScore -= 1 }
             UpdateDigits()
-            if currentScore <= 0{
+            if currentScore > 0 { AddDot() } else
+            {
                 ClearActions()
                 nextLevel()
-            } else {
-                AddDot()
             }
         }
-        else if intersected == false{
-            died()
-        }
+        else if intersected == false { died() }
     }
     
     func updateGameSpeed() {
