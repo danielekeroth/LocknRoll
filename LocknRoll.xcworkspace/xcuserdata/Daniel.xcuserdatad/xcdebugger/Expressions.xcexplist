@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "specialized _fatalErrorMessage(StaticString, StaticString, StaticString, UInt) -&gt; ():(null)">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexOfCurrent">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GameHelper.DotTouched() -&gt; ():GameHelper.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "fract/10">
+            </PersistentString>
+            <PersistentString
+               value = "currentScore">
+            </PersistentString>
+            <PersistentString
+               value = "currentLevel-(currentColorIndex*10)">
+            </PersistentString>
+            <PersistentString
+               value = "currentScore/currentLevel">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GameHelper.LoadSettings() -&gt; ():GameHelper.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Defaults.integerForKey(gameMode.rawValue + &quot;Highscore&quot;)">
+            </PersistentString>
+            <PersistentString
+               value = "gameMode">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GameHelper.died() -&gt; ():GameHelper.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentScore">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GameViewController.removeAdsButton(AnyObject) -&gt; ():GameViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "SettingsViewController.nextGameModeButton(AnyObject) -&gt; ():SettingsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentGameModeLabel.text">
+            </PersistentString>
+            <PersistentString
+               value = "AvailableGameModes.endIndex ">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GameViewController.productsRequest(SKProductsRequest, didReceiveResponse : SKProductsResponse) -&gt; ():GameViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.products">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GameHelper.LoadView() -&gt; ():GameHelper.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "newColor.CGColor">
+            </PersistentString>
+            <PersistentString
+               value = "NSLayoutAttribute.CenterX">
+            </PersistentString>
+            <PersistentString
+               value = "CGFloat(Double(56.0)/Double(255.0))">
+            </PersistentString>
+            <PersistentString
+               value = "self.GameScene.view">
+            </PersistentString>
+            <PersistentString
+               value = "Double(56.0/255.0)">
+            </PersistentString>
+            <PersistentString
+               value = "(UIColor)self.currentColor">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SettingsViewController.respondToSwipeGesture(UIGestureRecognizer) -&gt; ():SettingsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "gameModeLabel.focused">
+            </PersistentString>
+            <PersistentString
+               value = "gameModes.endIndex">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

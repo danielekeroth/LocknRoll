@@ -1,0 +1,33 @@
+PODS:
+  - ALKit (0.4)
+  - Crashlytics (3.7.0):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.7)
+  - LTMorphingLabel (0.2.0)
+  - ManualLayout (1.2.1)
+  - TVOSButton (0.4):
+    - ALKit
+  - TVOSToast (0.5):
+    - ManualLayout
+  - TwitterCore (2.0.2):
+    - Fabric
+
+DEPENDENCIES:
+  - Crashlytics
+  - Fabric
+  - LTMorphingLabel
+  - TVOSButton
+  - TVOSToast
+  - TwitterCore
+
+SPEC CHECKSUMS:
+  ALKit: 8e9bc8c4740c959431a9105d2050fa7cc90e48d8
+  Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
+  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
+  LTMorphingLabel: 490aa8e079f9247c7f3130f7d4b1be1d66677377
+  ManualLayout: 7326e29d60370c9fdfa41338f87f0b0ae350bf54
+  TVOSButton: 8077ba2eae78a000e6706e9d065a76bf99be05f9
+  TVOSToast: d424435cd836756cb11418c7e15480f4a6a40d85
+  TwitterCore: 0f44d8980a6879d5205dcb4e010d15e643e56fa0
+
+COCOAPODS: 0.39.0
