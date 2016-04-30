@@ -209,7 +209,10 @@ public class GameHelper : NodeCollection
         if colors.count == 0 {
             InitializeColors()
         }
-        NSUserDefaults.standardUserDefaults().setBool(true, forKey: gameMode.rawValue + "Played")
+        NSUserDefaults.standardUserDefaults().setBool(true, forKey: gameMode.rawValue.containsString("Classic") ? "Classic" : "Modern" + "Played")
+        if NSUserDefaults.standardUserDefaults().boolForKey("ModernPlayed") == true && NSUserDefaults.standardUserDefaults().boolForKey("ClassicPlayed") == true {
+            GCHelper.StoreAchievement(AchievementHelper.MixItUp)
+        }
         currentGameMode = NSUserDefaults.standardUserDefaults().stringForKey("currentGameMode")!
         AddScoreHolder()
         AddPauseOverlay()

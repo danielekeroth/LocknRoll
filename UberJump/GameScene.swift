@@ -11,44 +11,40 @@ import SpriteKit
 import CoreGraphics
 import Answers
 
-class ModernGameScene: SKScene,ALAdVideoPlaybackDelegate
+class GameScene: SKScene,ALAdVideoPlaybackDelegate
 {
     // Sprite Nodes
-    var Helper : GameHelper
+    var Helper : GameHelper?
     
     override init() {
-        Helper = SceneHelper.InitializeGameScene("Modern")
         super.init()
-        Helper.GameScene = self
     }
     
     required init?(coder aDecoder: NSCoder) {
-        Helper = SceneHelper.InitializeGameScene("Modern")
         super.init(coder: aDecoder)
-        Helper.GameScene = self
     }
     
-    override required init(size: CGSize)
+    init(size: CGSize,mode: String)
     {
-        Helper = SceneHelper.InitializeGameScene("Modern")
+        Helper = SceneHelper.InitializeGameScene(mode)
         super.init(size: size)
-        Helper.GameScene = self
+        Helper!.GameScene = self
     }
     
     override func didMoveToView(view: SKView) {
         ALInterstitialAd.shared().adVideoPlaybackDelegate = self;
-        Helper.LoadSettings()
-        Helper.LoadView()
+        Helper!.LoadSettings()
+        Helper!.LoadView()
     }
     
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
-        if Helper.Person.intersectsNode(Helper.Range){
-            Helper.intersected = true
+        if Helper!.Person.intersectsNode(Helper!.Range){
+            Helper!.intersected = true
         }
-        else if Helper.intersected == true && Helper.Person.intersectsNode(Helper.Range) == false
+        else if Helper!.intersected == true && Helper!.Person.intersectsNode(Helper!.Range) == false
         {
-            Helper.died()
+            Helper!.died()
         }
     }
 }

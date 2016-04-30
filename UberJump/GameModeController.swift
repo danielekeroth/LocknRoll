@@ -38,17 +38,8 @@ class GameModeController: UIViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "ClassicGameSegue"
-        {
-            if let destionation = segue.destinationViewController as? GameController {
-                destionation.segueId = "Classic"
-            }
-        }
-        else if segue.identifier == "ModernGameSegue"
-        {
-            if let destionation = segue.destinationViewController as? GameController {
-                destionation.segueId = "Modern"
-            }
+        if let destination = segue.destinationViewController as? GameController {
+            destination.segueId = segue.identifier == "ClassicGameSegue" ? "Classic" : "Modern"
         }
     }
     

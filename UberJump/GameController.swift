@@ -16,17 +16,7 @@ class GameController: UIViewController {
     var segueId = "";
     override func viewDidLoad() {
         super.viewDidLoad()
-        if NSUserDefaults.standardUserDefaults().boolForKey("modernPlayed") == true && NSUserDefaults.standardUserDefaults().boolForKey("classicPlayed") == true {
-            GCHelper.StoreAchievement(AchievementHelper.MixItUp)
-        }
-        if segueId == "Modern"
-        {
-            (self.view as! SKView).presentScene(ModernGameScene(size: self.view.bounds.size))
-        }
-        else if segueId == "Classic"
-        {
-            (self.view as! SKView).presentScene(ClassicGameScene(size: self.view.bounds.size))
-        }
+        (self.view as! SKView).presentScene(GameScene(size: self.view.bounds.size, mode: segueId))
     }
     
     override func didReceiveMemoryWarning() {
