@@ -66,39 +66,21 @@ class SettingsViewController: GameViewController
     var currentGameMode = ""
     
     @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
-        
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             
             switch swipeGesture.direction {
             case UISwipeGestureRecognizerDirection.Right:
-                if soundFXVolumeLabel.focused
+                if soundFXVolumeLabel.focused && soundFXVolumeBar.progress < 1.0
                 {
-                    if soundFXVolumeBar.progress < 1.0
-                    {
-                        soundFXVolumeBar.progress += 0.1
-                        NSUserDefaults.standardUserDefaults().setFloat(musicVolumeBar.progress, forKey: SettingsHelper.SFXVolume)
-                    }
+                    adjustFxVolume(true)
                 }
-                else if musicVoulmeLabel.focused
+                else if musicVoulmeLabel.focused && musicVolumeBar.progress < 1.0
                 {
-                    if musicVolumeBar.progress < 1.0
-                    {
-                        musicVolumeBar.progress += 0.1
-                        BGMusic.Player.volume = musicVolumeBar.progress
-                        NSUserDefaults.standardUserDefaults().setFloat(musicVolumeBar.progress, forKey: SettingsHelper.MusicVolume)
-                    }
+                    adjustMusicVolume(true)
                 }
                 else if gameModeLabel.focused
                 {
-                    let currentIndex = AvailableGameModes.indexOf(self.currentGameMode)
-                    var nextIndex = currentIndex!+1
-                    if nextIndex == AvailableGameModes.endIndex
-                    {
-                        nextIndex = 0
-                    }
-                    self.currentGameMode = AvailableGameModes[nextIndex]
-                    self.selectedGameModeLabel.text = self.currentGameMode
-                    NSUserDefaults.standardUserDefaults().setObject(currentGameMode, forKey: SettingsHelper.GameMode)
+                    changeGameMode(true)
                 }
                 else if bgMusicLabel.focused
                 {
@@ -118,32 +100,15 @@ class SettingsViewController: GameViewController
                 }
                 else if gameModeLabel.focused
                 {
-                    let currentIndex = AvailableGameModes.indexOf(currentGameMode)
-                    var nextIndex = currentIndex!-1
-                    if nextIndex < 0
-                    {
-                        nextIndex = AvailableGameModes.endIndex-1
-                    }
-                    currentGameMode = AvailableGameModes[nextIndex]
-                    selectedGameModeLabel.text = currentGameMode
-                    NSUserDefaults.standardUserDefaults().setObject(currentGameMode, forKey: SettingsHelper.GameMode)
+                    changeGameMode(false)
                 }
-                else if soundFXVolumeLabel.focused
+                else if soundFXVolumeLabel.focused && soundFXVolumeBar.progress > 0.0
                 {
-                    if soundFXVolumeBar.progress > 0.0
-                    {
-                        soundFXVolumeBar.progress -= 0.1
-                        NSUserDefaults.standardUserDefaults().setFloat(musicVolumeBar.progress, forKey: SettingsHelper.SFXVolume)
-                    }
+                    adjustFxVolume(false)
                 }
-                else if musicVoulmeLabel.focused
+                else if musicVoulmeLabel.focused && musicVolumeBar.progress > 0.0
                 {
-                    if musicVolumeBar.progress > 0.0
-                    {
-                        musicVolumeBar.progress -= 0.1
-                        BGMusic.Player.volume = musicVolumeBar.progress
-                        NSUserDefaults.standardUserDefaults().setFloat(musicVolumeBar.progress, forKey: SettingsHelper.MusicVolume)
-                    }
+                    adjustMusicVolume(false)
                 }
             default:
                 break
@@ -151,8 +116,37 @@ class SettingsViewController: GameViewController
         }
     }
     
+    func changeGameMode(goNext: Bool)
+    {
+        let currentIndex = AvailableGameModes.indexOf(self.currentGameMode)
+        var nextIndex = goNext == true ? currentIndex!+1 : currentIndex!-1
+        if nextIndex == AvailableGameModes.endIndex
+        {
+            nextIndex = 0
+        }
+        else if nextIndex < AvailableGameModes.startIndex
+        {
+            nextIndex = AvailableGameModes.endIndex-1
+        }
+        self.currentGameMode = AvailableGameModes[nextIndex]
+        self.selectedGameModeLabel.text = self.currentGameMode
+        NSUserDefaults.standardUserDefaults().setObject(currentGameMode, forKey: SettingsHelper.GameMode)
+    }
+    
+    func adjustFxVolume(raise: Bool)
+    {
+        soundFXVolumeBar.progress = raise == true ? soundFXVolumeBar.progress + 0.1 : soundFXVolumeBar.progress - 0.1
+        NSUserDefaults.standardUserDefaults().setFloat(soundFXVolumeBar.progress, forKey: SettingsHelper.SFXVolume)
+    }
+    
+    func adjustMusicVolume(raise: Bool)
+    {
+        musicVolumeBar.progress = raise == true ? musicVolumeBar.progress + 0.1 : musicVolumeBar.progress - 0.1
+        BGMusic.Player.volume = musicVolumeBar.progress
+        NSUserDefaults.standardUserDefaults().setFloat(musicVolumeBar.progress, forKey: SettingsHelper.MusicVolume)
+    }
+    
     override func viewDidLoad() {
-        NSUserDefaults.standardUserDefaults().setObject("Normal", forKey: SettingsHelper.GameMode)
         selectedGameModeLabel.morphingEffect = .Evaporate
         selectedGameModeLabel.morphingEnabled = true
         selectedBGMusicLabel.morphingEffect = .Scale
